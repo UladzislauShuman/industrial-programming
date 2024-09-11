@@ -1,4 +1,4 @@
-/*
+package org.example;/*
 Входные данные задаются как параметры командной строки.
 Показать генерацию и обработку исключительной ситуации
 собственного класса.
@@ -28,32 +28,52 @@ public class ExpressionOfX
             String[] tokens = breakLine(equation);
             int ans = 0;
             boolean isPlus = true;
+            boolean isSign = false;
             for (int i = 0; i < tokens.length; ++i)
             {
                 switch (tokens[i])
                 {
                     case "+":
-                        isPlus = true;
+                        if (isSign == true)
+                        {
+                            isPlus = (isPlus == true);
+                        }
+                        else
+                        {
+                            isSign = true;
+                            isPlus = true;
+                        }
                         break;
                     case "-":
-                        isPlus = false;
+                        if (isSign == true)
+                        {
+                            isPlus = (isPlus == false);
+                        }
+                        else
+                        {
+                            isSign = true;
+                            isPlus = false;
+                        }
                         break;
+
                     case "x":
                         if (isPlus)
                             ans += x;
                         else
                             ans -= x;
-
+                        isSign = false;
                         break;
                     default:
                         if (!tokens[i].matches("\\d+"))
                             throw MyException.NoInteger(tokens[i]);
+                        if (tokens[i] != "+" & tokens[i] != "-" & !tokens[i].matches("\\d+"))
+                            throw  MyException.NoPlusMinus(tokens[i]);
 
                         if (isPlus)
                             ans += Integer.parseInt(tokens[i]);
                         else
                             ans -= Integer.parseInt(tokens[i]);
-
+                        isSign = false;
                         break;
                 }
                 System.out.println(tokens[i]);
