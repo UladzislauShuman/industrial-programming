@@ -7,10 +7,10 @@ public class Main {
     {
         try
         {
-//            if (args.length != 1){
-//                throw new IOException("args.length != 1");
+//            if (args.length < 2){
+//                throw new IOException("args.length < 2");
 //            }
-//            ExpressionOfX.countEquation(args[0], Double.parseDouble(args[1]));
+//            System.out.println(ExpressionOfX.countEquation(args[0], Integer.parseInt(args[1])));
             System.out.println(ExpressionOfX.countEquation("-24 - x + 25", 12));
         }
         catch (Exception e)
