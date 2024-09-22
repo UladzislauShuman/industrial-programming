@@ -9,35 +9,50 @@ public class Matrix
     private int cols;
     private int[][] matrix;
 
-    public Matrix(String fileName)
+    public Matrix(String fileName) throws MyException
     {
         try
         {
             File file = new File(fileName);
             Scanner scanner;
-            System.out.println("Absolute path: " + file.getAbsolutePath());
             if (file.exists())
             {
                 scanner = new Scanner(file);
 
-                //Scanner scanner = new Scanner(new File(fileName));
-                this.rows = scanner.nextInt();
-                this.cols = scanner.nextInt();
-                scanner.nextLine();
+                String[] rows_cols = scanner.nextLine().split(" ");
+                if (rows_cols.length != 2)
+                    throw MyException.InvalidAmountArguments();
+
+                if (!rows_cols[0].matches("-?\\d+") || !rows_cols[1].matches("-?\\d+"))
+                    throw MyException.InvalidRowsCols_notNumber();
+
+                this.rows = Integer.parseInt(rows_cols[0]);
+                this.cols = Integer.parseInt(rows_cols[1]);
+
+                if (this.rows <= 0 || this.cols <= 0)
+                    throw MyException.InvalidRowsCols_lessZero();
 
                 this.matrix = new int[rows][cols];
                 for (int i = 0; i < rows; ++i) {
+
+                    if (!scanner.hasNextLine())
+                        throw MyException.InvalidRows(this.rows);
+
                     String[] temp = scanner.nextLine().split(" ");
+
                     if (temp.length != cols)
                         throw MyException.InvalidColums(cols, temp.length);
+
                     for (int j = 0; j < cols; ++j) {
+
                         if (!temp[j].matches("-?\\d+"))
-                            throw MyException.InvlaidNumber(i, j);
+                            throw MyException.InvalidNumber(i, j);
+
                         this.matrix[i][j] = Integer.parseInt(temp[j]);
                     }
                 }
                 if(scanner.hasNextLine())
-                    throw MyException.InvalidRows(rows);
+                    throw MyException.InvalidRows(this.rows);
             }
             else
             {
@@ -48,7 +63,8 @@ public class Matrix
         }
         catch (Exception e)
         {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
+            throw new MyException(e.getMessage());
         }
     }
 

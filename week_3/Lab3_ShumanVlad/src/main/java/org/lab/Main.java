@@ -9,11 +9,10 @@ public class Main {
     {
         try
         {
-//            if (args.length != 1)
-//                // добавить в свой класс исключений
-//                throw new Exception("!=1");
+            if (args.length != 1)
+                throw MyException.InvalidConsoleArguments();
 
-            Matrix matrix = new Matrix("test.txt");
+            Matrix matrix = new Matrix(args[0]);
             matrix.printMatrix();
             System.out.println(matrix.printMinMax());
 
