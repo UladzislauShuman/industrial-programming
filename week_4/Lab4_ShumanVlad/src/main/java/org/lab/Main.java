@@ -14,7 +14,6 @@ public class Main {
         {
             tree.add(i);
         }
-        tree.getRoot();
 //        tree.NLR();
         tree.LNR();
 //        tree.LRN();

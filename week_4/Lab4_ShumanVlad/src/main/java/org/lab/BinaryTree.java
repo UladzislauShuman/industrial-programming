@@ -33,8 +33,10 @@ public class BinaryTree<T extends Comparable<T>>
             this.right = null;
         }
 
-        public T getData()
+        public T getData() throws MyException
         {
+            if(this == null)
+                throw MyException.GetDataFromNull();
             return this.data;
         }
     }
@@ -42,8 +44,10 @@ public class BinaryTree<T extends Comparable<T>>
     private Node root;
 
     //конструктор с параметрами
-    public BinaryTree(T value)
+    public BinaryTree(T value) throws MyException
     {
+        if (value == null)
+            throw MyException.NullValueInArgument();
         this.root = new Node(value);
     }
 
@@ -53,13 +57,11 @@ public class BinaryTree<T extends Comparable<T>>
         this.root = null;
     }
 
-    public void getRoot()
-    {
-        System.out.println(this.root.data);
-    }
     //поиск вершины
-    public Node find(T value)
+    public Node find(T value) throws MyException
     {
+        if (value == null)
+            throw MyException.NullValueInArgument();
         return this.find(value, this.root);
     }
 
@@ -82,8 +84,10 @@ public class BinaryTree<T extends Comparable<T>>
     /*
     я решил не добавлять элемент, который уже есть в дереве
      */
-    public boolean add(T value)
+    public boolean add(T value) throws MyException
     {
+        if (value == null)
+            throw MyException.NullValueInArgument();
         if (this.root == null)
         {
             this.root = new Node(value);
@@ -165,8 +169,10 @@ public class BinaryTree<T extends Comparable<T>>
     }
 
     //    • удаление вершины (опционально);
-    public boolean delete(T value)
+    public boolean delete(T value) throws  MyException
     {
+        if (value == null)
+            throw MyException.NullValueInArgument();
         return this.delete(value, this.root, this.root);
     }
     private boolean delete(T value,Node parent, Node current)
@@ -241,13 +247,5 @@ public class BinaryTree<T extends Comparable<T>>
             successor.right = delNode.right;
         }
         return successor;
-    }
-
-    private Node getLocalMinimum(Node current)
-    {
-        if(current.left == null)
-            return current;
-        else
-            return this.getLocalMinimum(current.left);
     }
 }
