@@ -14,11 +14,12 @@ public class Main {
         {
             tree.add(i);
         }
-//        tree.NLR();
-        tree.LNR();
-//        tree.LRN();
+        System.out.println(tree.NLR());
+        System.out.println(tree.LNR());
+        System.out.println(tree.LRN());
+        System.out.println();
         tree.delete(5);
-        tree.LNR();
+        System.out.println(tree.LNR());
         tree.add(5);
         tree.LNR();
 

@@ -122,49 +122,58 @@ public class BinaryTree<T extends Comparable<T>>
         return true;
     }
     //    • обход дерева «Вершина-Левый-Правый»
-    public void NLR()
+    public String NLR()
     {
-        this.NLR(this.root);
+        StringBuilder ans = new StringBuilder();
+        this.NLR(this.root, ans);
         System.out.println();
+        return ans.toString();
     }
-    private void NLR(Node local)
+    private void NLR(Node local, StringBuilder sb)
     {
         if (local != null)
         {
+            sb.append(local.getData() + " ");
             System.out.print(local.getData() + " ");
-            this.NLR(local.left);
-            this.NLR(local.right);
+            this.NLR(local.left, sb);
+            this.NLR(local.right, sb);
         }
     }
     //    • обход дерева «Левый-Правый- Вершина»;
-    public void LRN()
+    public String LRN()
     {
-        this.LRN(this.root);
+        StringBuilder ans = new StringBuilder();
+        this.LRN(this.root, ans);
         System.out.println();
+        return ans.toString();
     }
-    private void LRN(Node local)
+    private void LRN(Node local, StringBuilder sb)
     {
         if (local != null)
         {
-            this.LRN(local.left);
-            this.LRN(local.right);
+            this.LRN(local.left, sb);
+            this.LRN(local.right, sb);
+            sb.append(local.getData() + " ");
             System.out.print(local.getData() + " ");
         }
     }
     //    • обход дерева «Левый- Вершина -Правый»
-    public void LNR()
+    public String LNR()
     {
-        this.LNR(this.root);
+        StringBuilder ans = new StringBuilder();
+        this.LNR(this.root, ans);
         System.out.println();
+        return ans.toString();
     }
 
-    private void LNR (Node local)
+    private void LNR (Node local, StringBuilder sb)
     {
         if (local != null)
         {
-            this.LNR(local.left);
+            this.LNR(local.left, sb);
+            sb.append(local.getData() + " ");
             System.out.print(local.getData() + " ");
-            this.LNR(local.right);
+            this.LNR(local.right, sb);
         }
     }
 
