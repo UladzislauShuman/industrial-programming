@@ -17,7 +17,10 @@ package org.lab;
  */
 
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
+    public static void main(String[] args)
+    {
+        Liner liner = new Liner(1,1);
+        System.out.println(liner.toString(1, 10));
+        System.out.println(new Exponential(1, 2).toString(1, 10));
     }
 }
