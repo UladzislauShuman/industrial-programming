@@ -1,3 +1,5 @@
+import java.util.function.Predicate;
+
 public class Main {
     //1
     //Equatable или Comparable
@@ -39,26 +41,22 @@ public class Main {
     }
 
     //5
-    //чёт пока не может найтись автоматически нужный класс
-    //появится в финальной версии до следующего понедельника
-    public static <T> T getSum(T[] array) throws Exception
+    public static <T extends Number> double getSum(T[] array) throws Exception
     {
         if (array.length == 0)
         {
             throw new Exception("array.length == 0");
         }
-        //надо чтобы был равено внутреннему нейтральному элементу
-        T res;
+        double res = 0;
         for (T e : array)
         {
-            res += e;
+            res += e.doubleValue();
         }
         return res;
     }
 
     //6
-    //такае же ситуация как и с 5)
-    public static <T> T getMedium(T[] array) throws Exception
+    public static <T extends Number> double getMedium(T[] array) throws Exception
     {
         if (array.length == 0)
         {
@@ -68,10 +66,37 @@ public class Main {
     }
 
     //7
-    //пока не придумал
+    public static <T> int getAmountPredicate(T[] array, Predicate<T> predicate)
+    {
+        int count = 0;
+        for (T element : array)
+        {
+            if(predicate.test(element))
+            {
+                count++;
+            }
+        }
+        return count;
+    }
 
     public static void main(String[] args)
     {
-        return;
+        try
+        {
+            Integer[] array = {1,2,3,4,5,6,7,8,9,10};
+            Predicate<Integer> predicate = element -> element % 2 == 0;
+
+            System.out.println(Main.find(array, 2));
+            System.out.println(Main.getAmountEquals(array, 11));
+            System.out.println(Main.getAmountBigger(array, 4));
+            System.out.println(Main.getSum(array));
+            System.out.println(Main.getMedium(array));
+            System.out.println(Main.getAmountPredicate(array, predicate));
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+
     }
 }
