@@ -16,11 +16,19 @@ package org.lab;
 в т.ч. отображения на окне первых n элементов.
  */
 
+import javax.swing.*;
+
 public class Main {
     public static void main(String[] args)
     {
-        Liner liner = new Liner(1,1);
-        System.out.println(liner.toString(1, 10));
-        System.out.println(new Exponential(1, 2).toString(1, 10));
+        try
+        {
+            MyWindow myWindow = new MyWindow();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Main: " + e.getMessage());
+        }
+
     }
 }
