@@ -10,6 +10,10 @@ import java.awt.event.ActionListener;
 //Реализовать оконное приложение с удобным интерфейсом (выбор прогрессии, выбор имени файла и т.п.),
 //в т.ч. отображения на окне первых n элементов.
 
+/*
+наверное нужно добавить Action в
+TextEdit и потом чтобы они меняли значение в кнопке
+ */
 public class MyWindow extends JFrame
 {
     private JTextField fileNameField;
@@ -20,14 +24,14 @@ public class MyWindow extends JFrame
     private JButton calculateButton;
     private JComboBox<String> typeBox;
 
-    public MyWindow()
+    public MyWindow() throws Exception
     {
         this.setSize(400, 300);
         this.setTitle("Series");
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        this.setLayout(new FlowLayout());
+        this.setLayout(new GridLayout(6,2));
 
         this.fileNameField = new JTextField(15);
         this.addElement("FileName: ", this.fileNameField);
@@ -56,7 +60,7 @@ public class MyWindow extends JFrame
 
         this.resultArea = new JTextArea(10, 30);
         this.resultArea.setEditable(false);
-        this.addElement("Result: ", new JScrollPane(this.resultArea));
+        this.add(new JScrollPane(this.resultArea));
 
         this.setLocationRelativeTo(null);
     }
@@ -91,7 +95,9 @@ public class MyWindow extends JFrame
 
     private void addElement(String elementName, Component element)
     {
-        this.add(new JLabel(elementName));
+        JLabel elementLabel = new JLabel(elementName);
+        elementLabel.setHorizontalAlignment(JLabel.CENTER);
+        this.add(elementLabel);
         this.add(element);
     }
 

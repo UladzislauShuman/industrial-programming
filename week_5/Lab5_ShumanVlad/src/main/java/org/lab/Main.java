@@ -17,17 +17,20 @@ package org.lab;
  */
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Main {
-    public static void main(String[] args)
-    {
+
+
+    public static void main(String[] args){
         try
         {
             MyWindow myWindow = new MyWindow();
+            myWindow.setVisible(true);
         }
         catch (Exception e)
         {
-            System.out.println("Main: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
 
     }
