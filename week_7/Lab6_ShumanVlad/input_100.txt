@@ -1,0 +1,99 @@
+Teddy Bear, 20, 3, 7
+Lego Set, 45, 6, 12
+Rubik's Cube, 10, 8, 99
+Action Figure, 15, 5, 10
+Doll, 25, 3, 8
+Toy Car, 12, 2, 6
+Puzzle, 18, 4, 10
+Board Game, 35, 6, 14
+Stuffed Animal, 22, 2, 5
+Play-Doh, 8, 3, 6
+Remote Control Car, 50, 7, 12
+Train Set, 60, 5, 10
+Bicycle, 90, 5, 12
+Kite, 12, 6, 12
+Water Gun, 15, 4, 8
+Model Airplane, 40, 8, 14
+Magic Set, 25, 6, 12
+Building Blocks, 30, 2, 6
+Yo-Yo, 5, 5, 99
+Marbles, 4, 6, 12
+Scooter, 75, 5, 10
+Beach Ball, 5, 1, 5
+Basketball, 20, 8, 99
+Soccer Ball, 18, 7, 99
+Hula Hoop, 10, 4, 8
+Frisbee, 8, 6, 99
+Jump Rope, 7, 5, 10
+Tennis Racket, 30, 8, 99
+Badminton Set, 20, 6, 99
+Bowling Set, 25, 3, 7
+Toy Drum, 15, 2, 6
+Keyboard, 50, 4, 12
+Guitar, 55, 5, 12
+Harmonica, 12, 6, 99
+Trumpet, 35, 7, 14
+Microscope, 45, 8, 14
+Telescope, 60, 10, 99
+Science Kit, 30, 8, 14
+Chemistry Set, 35, 10, 16
+Robot Kit, 50, 10, 14
+Remote Control Helicopter, 55, 10, 16
+Slinky, 8, 3, 7
+Yo-Yo, 5, 5, 99
+Bouncing Ball, 6, 4, 8
+Crayons, 10, 2, 7
+Paint Set, 15, 4, 10
+Coloring Book, 8, 3, 7
+Sketch Pad, 12, 6, 14
+Pencil Set, 10, 3, 12
+Markers, 8, 4, 10
+Sticker Book, 7, 2, 7
+Scrapbook, 10, 8, 14
+Clay Set, 18, 4, 10
+Origami Paper, 5, 6, 12
+Puzzle Cube, 10, 8, 99
+Crossword Puzzle, 15, 10, 99
+Maze Book, 12, 8, 14
+Sudoku Book, 10, 10, 99
+Rubik's Cube, 10, 8, 99
+Word Search, 8, 8, 14
+Chess Set, 20, 10, 99
+Checkers Set, 15, 8, 99
+Go Set, 25, 12, 99
+Dominoes, 12, 6, 99
+Mahjong Set, 40, 12, 99
+Card Game, 5, 6, 99
+Deck of Cards, 3, 8, 99
+UNO, 8, 7, 99
+Monopoly, 25, 8, 99
+Scrabble, 20, 10, 99
+Battleship, 18, 8, 99
+Risk, 22, 10, 99
+Clue, 18, 8, 99
+Life, 20, 8, 99
+Catan, 30, 10, 99
+Ticket to Ride, 35, 10, 99
+Pandemic, 30, 10, 99
+Azul, 25, 10, 99
+Codenames, 15, 10, 99
+Carcassonne, 25, 10, 99
+Splendor, 20, 10, 99
+Quoridor, 15, 8, 99
+Tic-Tac-Toe, 5, 5, 99
+Connect 4, 15, 6, 99
+Simon, 20, 6, 12
+Operation, 25, 6, 12
+Perfection, 18, 6, 12
+Guess Who?, 20, 6, 12
+Twister, 20, 6, 99
+Jenga, 15, 6, 99
+Boggle, 12, 8, 99
+Pictionary, 20, 8, 99
+Charades, 18, 8, 99
+Taboo, 15, 10, 99
+Telestrations, 25, 10, 99
+Exploding Kittens, 20, 8, 99
+Coup, 15, 10, 99
+Love Letter, 10, 10, 99
+Spyfall, 15, 10, 99

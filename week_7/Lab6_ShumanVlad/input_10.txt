@@ -1,0 +1,10 @@
+Teddy Bear, 20, 3, 7
+Lego Set, 45, 6, 12
+Rubik's Cube, 10, 8, 99
+Action Figure, 15, 5, 10
+Doll, 25, 3, 8
+Toy Car, 12, 2, 6
+Puzzle, 18, 4, 10
+Board Game, 35, 6, 14
+Stuffed Animal, 22, 2, 5
+Play-Doh, 8, 3, 6
