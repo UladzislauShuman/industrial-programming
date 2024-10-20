@@ -3,14 +3,12 @@ package org.lab;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class BinaryTreeTest {
 
     @Test
     void NLR_LNR_LNR()
     {
-        BinaryTree<Integer> tree = new BinaryTree<Integer>();
+        BinaryTree<Integer> tree = new BinaryTree<Integer>((Comparator<Integer>) Comparator.naturalOrder());
         int test = 5;
         tree.add(test);
         for (int i = 1; i < test; ++i)

@@ -1,9 +1,11 @@
 package org.lab;
 
+import java.util.Comparator;
+
 public class Main {
     public static void main(String[] args)
     {
-        BinaryTree<Integer> tree = new BinaryTree<Integer>();
+        BinaryTree<Integer> tree = new BinaryTree<Integer>((Comparator<Integer>)Comparator.naturalOrder());
         int test = 5;
         tree.add(test);
         for (int i = 1; i < test; ++i)

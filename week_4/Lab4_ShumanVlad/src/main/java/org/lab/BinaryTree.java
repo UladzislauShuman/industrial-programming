@@ -20,8 +20,15 @@ package org.lab;
     2 Параметризация классов.
  */
 
-public class BinaryTree<T extends Comparable<T>>
+import java.util.Comparator;
+
+public class BinaryTree<T extends Comparable<T>> implements BinaryTreeComparator<T>
 {
+    @Override
+    public int compare(T object1, T object2) {
+        return object1.compareTo(object2);
+    }
+
     public class Node {
         private T data;
         private Node left;
@@ -52,7 +59,7 @@ public class BinaryTree<T extends Comparable<T>>
     }
 
     //конструктор без параметров
-    public BinaryTree()
+    public BinaryTree(Comparator<Integer> integerComparator)
     {
         this.root = null;
     }
