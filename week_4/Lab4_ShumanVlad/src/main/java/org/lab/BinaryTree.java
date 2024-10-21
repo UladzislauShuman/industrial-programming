@@ -51,7 +51,7 @@ public class BinaryTree<T> implements BinaryTreeComparator<T>
     private Comparator<T> comparator;
     private Node root;
 
-
+    /*
     //конструктор с параметрами
     public BinaryTree(T value) throws MyException
     {
@@ -59,8 +59,7 @@ public class BinaryTree<T> implements BinaryTreeComparator<T>
             throw MyException.NullValueInArgument();
         this.root = new Node(value);
     }
-
-    //конструктор без параметров
+    */
     public BinaryTree(Comparator<T> comparator) throws Exception
     {
         this.comparator = comparator;
