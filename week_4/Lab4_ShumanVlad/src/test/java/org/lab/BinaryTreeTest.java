@@ -3,32 +3,42 @@ package org.lab;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Comparator;
+
 class BinaryTreeTest {
 
     @Test
     void NLR_LNR_LNR()
     {
-        BinaryTree<Integer> tree = new BinaryTree<Integer>((Comparator<Integer>) Comparator.naturalOrder());
-        int test = 5;
-        tree.add(test);
-        for (int i = 1; i < test; ++i)
+        BinaryTree<Integer> tree;
+        try
         {
-            tree.add(i);
-        }
-        for (int i = 6; i <= 10; ++i)
-        {
-            tree.add(i);
-        }
+            tree = new BinaryTree<Integer>((Comparator<Integer>) Comparator.naturalOrder());
+            int test = 5;
+            tree.add(test);
+            for (int i = 1; i < test; ++i)
+            {
+                tree.add(i);
+            }
+            for (int i = 6; i <= 10; ++i)
+            {
+                tree.add(i);
+            }
 
-        Assertions.assertEquals("5 1 2 3 4 6 7 8 9 10 ",
-                tree.NLR()
-        );
-        Assertions.assertEquals("1 2 3 4 5 6 7 8 9 10 ",
-                tree.LNR()
-        );
-        Assertions.assertEquals("4 3 2 1 10 9 8 7 6 5 ",
-                tree.LRN()
-        );
+            Assertions.assertEquals("5 1 2 3 4 6 7 8 9 10 ",
+                    tree.NLR()
+            );
+            Assertions.assertEquals("1 2 3 4 5 6 7 8 9 10 ",
+                    tree.LNR()
+            );
+            Assertions.assertEquals("4 3 2 1 10 9 8 7 6 5 ",
+                    tree.LRN()
+            );
+        }
+        catch (Exception e)
+        {
+            System.out.println("Try in test " + e.getMessage());
+        }
     }
 
     @Test

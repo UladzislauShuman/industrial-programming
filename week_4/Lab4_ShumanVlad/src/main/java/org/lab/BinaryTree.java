@@ -22,11 +22,11 @@ package org.lab;
 
 import java.util.Comparator;
 
-public class BinaryTree<T extends Comparable<T>> implements BinaryTreeComparator<T>
+public class BinaryTree<T> implements BinaryTreeComparator<T>
 {
     @Override
     public int compare(T object1, T object2) {
-        return object1.compareTo(object2);
+        return this.comparator.compare(object1, object2);
     }
 
     public class Node {
@@ -48,7 +48,9 @@ public class BinaryTree<T extends Comparable<T>> implements BinaryTreeComparator
         }
     }
 
+    private Comparator<T> comparator;
     private Node root;
+
 
     //конструктор с параметрами
     public BinaryTree(T value) throws MyException
@@ -59,8 +61,9 @@ public class BinaryTree<T extends Comparable<T>> implements BinaryTreeComparator
     }
 
     //конструктор без параметров
-    public BinaryTree(Comparator<Integer> integerComparator)
+    public BinaryTree(Comparator<T> comparator) throws Exception
     {
+        this.comparator = comparator;
         this.root = null;
     }
 
@@ -76,7 +79,8 @@ public class BinaryTree<T extends Comparable<T>> implements BinaryTreeComparator
     {
         if (current != null)
         {
-            int compare = value.compareTo(current.data);
+            int compare = this.comparator.compare(value, current.data);
+            //int compare = value.compareTo(current.data);
             if (compare == 0)
                 return current;
             else if(compare < 0)
@@ -106,7 +110,7 @@ public class BinaryTree<T extends Comparable<T>> implements BinaryTreeComparator
 
     private boolean add(T value, Node current)
     {
-        int compare = value.compareTo(current.getData());
+        int compare = this.comparator.compare(value, current.data);
         if(compare < 0)
         {
             if (current.left == null) {
@@ -194,7 +198,7 @@ public class BinaryTree<T extends Comparable<T>> implements BinaryTreeComparator
     private boolean delete(T value,Node parent, Node current)
     {
         if (current != null) {
-            int compare = value.compareTo(current.data);
+            int compare = this.comparator.compare(value, current.data);
             if (compare == 0)
             {
                 //нет потомков
