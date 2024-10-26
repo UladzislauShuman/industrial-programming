@@ -1,0 +1,11 @@
+Caramel Apple Delight 15 30 APPLE SOFT
+Caramel Orange Bliss 20 35 ORANGE HARD
+Caramel Banana Dream 25 40 BANANA VERY_HARD
+Caramel Cola Twist 10 25 COLA HARD
+Caramel Milky Way 30 20 MILK SOFT
+
+Chocolate Classic White 50 45 WHITE_CHOCOLATE NOTHING
+Chocolate Cocoa Passion 60 50 DARK_CHOCOLATE NUTS
+Chocolate Milky Delight 45 55 MILK_CHOCOLATE RAISINS
+Chocolate Dark Sensation 70 60 DARK_CHOCOLATE NOTHING
+Chocolate Nutty Heaven 80 50 MILK_CHOCOLATE NUTS

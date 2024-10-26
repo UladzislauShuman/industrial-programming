@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Present
 {
@@ -39,7 +41,11 @@ public class Present
         return result.toString();
     }
 
-    //append
+    //@Override
+    public void add(Sweet sweet)
+    {
+        this.sweets.add(sweet);
+    }
 
     public Present sortWeight()
     {
@@ -52,5 +58,27 @@ public class Present
         return this;
     }
 
-    public Present findSweetSugarPercent()
+    public Present sortSugarPercant()
+    {
+        Collections.sort(this.sweets, new Comparator<Sweet>() {
+            @Override
+            public int compare(Sweet o1, Sweet o2) {
+                return o1.getSugarPercent() - o2.getSugarPercent();
+            }
+        });
+        return this;
+    }
+
+    public Present findSweetSugarPercent(int minSugarPercent, int maxSugarPersent)
+    {
+        this.sortSugarPercant();
+        Predicate<Sweet> predicate = sweet -> minSugarPercent <= sweet.getSugarPercent() &&
+                sweet.getSugarPercent() <= maxSugarPersent;
+        Present present = new Present(
+                new ArrayList<Sweet>(
+                        this.sweets.stream().filter(predicate).collect(Collectors.toList())
+                )
+        );
+        return present;
+    }
 }
