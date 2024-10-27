@@ -2,14 +2,11 @@ package org.conwrk_ex.objects.present;
 
 import org.conwrk_ex.objects.sweet.Sweet;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class Present
+public class Present implements Iterable<Sweet>
 {
     private ArrayList<Sweet> sweets;
 
@@ -56,7 +53,6 @@ public class Present
         });
         return this;
     }
-
     public Present sortSugarPercant()
     {
         Collections.sort(this.sweets, new Comparator<Sweet>() {
@@ -67,17 +63,56 @@ public class Present
         });
         return this;
     }
+    public Present sort(Comparator<Sweet> comparator)
+    {
+        Collections.sort(
+                this.sweets,
+                comparator
+        );
+        return this;
+    }
 
     public Present findSweetSugarPercent(int minSugarPercent, int maxSugarPersent)
     {
         this.sortSugarPercant();
         Predicate<Sweet> predicate = sweet -> minSugarPercent <= sweet.getSugarPercent() &&
                 sweet.getSugarPercent() <= maxSugarPersent;
-        Present present = new Present(
+        return this.find(predicate);
+    }
+    public Present find(Predicate<Sweet> predicate)
+    {
+        return new Present(
                 new ArrayList<Sweet>(
                         this.sweets.stream().filter(predicate).collect(Collectors.toList())
                 )
         );
-        return present;
+    }
+
+    public String getStatistics()
+    {
+        Map<String, Integer> weightMap = new HashMap<>();
+        int totalWeight = 0;
+
+        for (Sweet sweet : this.sweets)
+        {
+            String type = sweet.getClass().getSimpleName();
+            weightMap.put(type, weightMap.getOrDefault(type,0) + sweet.getWeight());
+            totalWeight += sweet.getWeight();
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (Map.Entry<String, Integer> entry : weightMap.entrySet())
+        {
+            String type = entry.getKey();
+            int weight = entry.getValue();
+            double percentage = (double) weight / totalWeight * 100;
+            result.append(type).append(" ").append(weight).append(" ").append(percentage).append("\n");
+        }
+        return result.toString();
+    }
+    @Override
+    public Iterator<Sweet> iterator()
+    {
+        return this.sweets.iterator();
     }
 }
