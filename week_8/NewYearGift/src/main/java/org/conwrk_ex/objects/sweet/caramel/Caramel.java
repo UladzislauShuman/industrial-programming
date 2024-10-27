@@ -16,15 +16,15 @@ public class Caramel extends Sweet
 
             Taste taste,
             Hardness hardness
-    )
+    ) throws Exception
     {
         super(name,weight,sugarPercent);
         this.taste = taste;
         this.hardness = hardness;
     }
 
-    public Caramel(String line){this(line.split(" "));}
-    private Caramel(String[] words)
+    public Caramel(String line) throws Exception {this(line.split(" "));}
+    private Caramel(String[] words) throws Exception
     {
         this(
                 words[0],
@@ -36,7 +36,20 @@ public class Caramel extends Sweet
     }
     public static Caramel readLine(String line)
     {
-        return new Caramel(line);
+        try
+        {
+            return new Caramel(line);
+        }
+        catch (SecurityException e)
+        {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     @Override

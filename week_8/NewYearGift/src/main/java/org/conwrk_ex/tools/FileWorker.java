@@ -1,5 +1,6 @@
 package org.conwrk_ex.tools;
 
+import org.conwrk_ex.objects.exceptions.SweetException;
 import org.conwrk_ex.objects.present.Present;
 import org.conwrk_ex.objects.sweet.Sweet;
 
@@ -24,10 +25,13 @@ public class FileWorker
         reader.close();
         return present;
     }
-    private static Sweet readLine(String line)
+    private static Sweet readLine(String line) throws Exception
     {
         String sweetType = line.split(" ")[0];
-        return (Sweet) SweetChooser.getFunction(sweetType).apply(Tools.deleteFirstWord(line));
+        Sweet sweet = (Sweet) SweetChooser.getFunction(sweetType).apply(Tools.deleteFirstWord(line));
+        if (sweet == null)
+            throw new SweetException(SweetException.Message.NULL_SWEET);
+        return sweet;
     }
 
     public static void writeFile(String data, String fileName) throws Exception

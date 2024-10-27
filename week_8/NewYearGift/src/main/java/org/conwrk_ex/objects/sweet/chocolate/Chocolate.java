@@ -1,5 +1,6 @@
 package org.conwrk_ex.objects.sweet.chocolate;
 
+import org.conwrk_ex.objects.exceptions.SweetException;
 import org.conwrk_ex.objects.sweet.Sweet;
 import org.conwrk_ex.objects.sweet.caramel.constants.Hardness;
 import org.conwrk_ex.objects.sweet.caramel.constants.Taste;
@@ -11,21 +12,21 @@ public class Chocolate extends Sweet
     private Type type;
     private Filling filling;
 
-    public Chocolate(
+    public Chocolate (
         String name,
         int weight,
         int sugarPercent,
 
         Type type,
         Filling filling
-        )
+        ) throws Exception
     {
         super(name,weight,sugarPercent);
         this.type = type;
         this.filling = filling;
     }
-    public Chocolate(String line){this(line.split(" "));}
-    private Chocolate(String[] words)
+    public Chocolate(String line) throws Exception {this(line.split(" "));}
+    private Chocolate(String[] words) throws Exception
     {
         this(
                 words[0],
@@ -37,7 +38,19 @@ public class Chocolate extends Sweet
     }
     public static Chocolate readLine(String line)
     {
-        return new Chocolate(line);
+        try {
+            return new Chocolate(line);
+        }
+        catch (SweetException e)
+        {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     @Override
