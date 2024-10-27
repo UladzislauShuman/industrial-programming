@@ -1,5 +1,7 @@
 package org.conwrk_ex.objects.present;
 
+import org.conwrk_ex.objects.exceptions.PresentException;
+import org.conwrk_ex.objects.exceptions.SweetException;
 import org.conwrk_ex.objects.sweet.Sweet;
 
 import java.util.*;
@@ -14,18 +16,24 @@ public class Present implements Iterable<Sweet>
     {
         this.sweets = new ArrayList<Sweet>();
     }
-    public Present(ArrayList<Sweet> sweets)
+    public Present(ArrayList<Sweet> sweets) throws Exception
     {
         this();
+        if (sweets == null)
+            throw new PresentException(PresentException.Message.NULL_ARRAYLIST);
         this.sweets.addAll(sweets);
     }
-    public Present(Present present)
+    public Present(Present present) throws Exception
     {
         this();
+        if (present == null)
+            throw new PresentException(PresentException.Message.NULL_PRESENT);
         this.sweets.addAll(present.sweets);
     }
-    public Present(Sweet ... sweets)
+    public Present(Sweet ... sweets) throws Exception
     {
+        if (sweets == null)
+            throw new PresentException(PresentException.Message.NULL_SWEETS);
         this.sweets = new ArrayList<Sweet>(Arrays.asList(sweets));
     }
 
@@ -38,8 +46,10 @@ public class Present implements Iterable<Sweet>
         return result.toString();
     }
 
-    public void add(Sweet sweet)
+    public void add(Sweet sweet) throws Exception
     {
+        if (sweet == null)
+            throw new PresentException(PresentException.Message.NULL_ADD_SWEET);
         this.sweets.add(sweet);
     }
 
@@ -63,8 +73,10 @@ public class Present implements Iterable<Sweet>
         });
         return this;
     }
-    public Present sort(Comparator<Sweet> comparator)
+    public Present sort(Comparator<Sweet> comparator) throws Exception
     {
+        if (comparator == null)
+            throw new PresentException(PresentException.Message.NULL_COMPARATOR);
         Collections.sort(
                 this.sweets,
                 comparator
@@ -72,15 +84,22 @@ public class Present implements Iterable<Sweet>
         return this;
     }
 
-    public Present findSweetSugarPercent(int minSugarPercent, int maxSugarPersent)
+    public Present findSweetSugarPercent(int minSugarPercent, int maxSugarPersent) throws Exception
     {
+        if (minSugarPercent < 0 ||
+                minSugarPercent > 100 ||
+                maxSugarPersent < 0 ||
+                maxSugarPersent > 0)
+            throw new SweetException(SweetException.Message.BAD_SUGAR_PERCENT);
         this.sortSugarPercant();
         Predicate<Sweet> predicate = sweet -> minSugarPercent <= sweet.getSugarPercent() &&
                 sweet.getSugarPercent() <= maxSugarPersent;
         return this.find(predicate);
     }
-    public Present find(Predicate<Sweet> predicate)
+    public Present find(Predicate<Sweet> predicate) throws Exception
     {
+        if (predicate == null)
+            throw new PresentException(PresentException.Message.NULL_PREDICATE);
         return new Present(
                 new ArrayList<Sweet>(
                         this.sweets.stream().filter(predicate).collect(Collectors.toList())

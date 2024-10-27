@@ -1,5 +1,7 @@
 package org.conwrk_ex.objects.sweet.chocolate;
 
+import org.conwrk_ex.objects.exceptions.CaramelException;
+import org.conwrk_ex.objects.exceptions.ChocolateException;
 import org.conwrk_ex.objects.exceptions.SweetException;
 import org.conwrk_ex.objects.sweet.Sweet;
 import org.conwrk_ex.objects.sweet.caramel.constants.Hardness;
@@ -32,10 +34,37 @@ public class Chocolate extends Sweet
                 words[0],
                 Integer.parseInt(words[1]),
                 Integer.parseInt(words[2]),
-                Type.valueOf(words[3]),
-                Filling.valueOf(words[4])
+                parseType(words[3]),
+                parseFilling(words[4])
         );
     }
+    private static Filling parseFilling(String filling) throws Exception
+    {
+        if (filling.isEmpty())
+            throw new ChocolateException(ChocolateException.Message.EMPTY_FILLING);
+        try
+        {
+            return Filling.valueOf(filling);
+        }
+        catch (IllegalAccessError e)
+        {
+            throw new ChocolateException(ChocolateException.Message.BAD_FILLING);
+        }
+    }
+    private static Type parseType(String type) throws Exception
+    {
+        if (type.isEmpty())
+            throw new ChocolateException(ChocolateException.Message.EMPTY_TYPE);
+        try
+        {
+            return Type.valueOf(type);
+        }
+        catch (IllegalAccessError e)
+        {
+            throw new ChocolateException(ChocolateException.Message.BAD_TYPE);
+        }
+    }
+
     public static Chocolate readLine(String line)
     {
         try {

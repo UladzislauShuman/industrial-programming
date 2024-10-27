@@ -20,6 +20,10 @@ public class SweetException extends Exception {
         map.put(Message.WEIGHT_LESS_ZERO,"sweet weight less then zero");
         map.put(Message.BAD_SUGAR_PERCENT, "sugar percent is not between 0 and 100");
     }
+    public SweetException(SweetException.Message message, String information)
+    {
+        this(map.get(message) + " ||| " + information);
+    }
     public SweetException(Message message)
     {
         this(map.get(message));
@@ -27,6 +31,4 @@ public class SweetException extends Exception {
     private SweetException(String message) {
         super(message);
     }
-
-
 }

@@ -1,5 +1,6 @@
 package org.conwrk_ex;
 
+import org.conwrk_ex.objects.exceptions.CaramelException;
 import org.conwrk_ex.objects.exceptions.SweetException;
 import org.conwrk_ex.objects.sweet.chocolate.Chocolate;
 import org.conwrk_ex.objects.sweet.chocolate.constants.Filling;
@@ -28,7 +29,12 @@ public class Main {
             Window window = new Window();
 
         }
+        //пока не придумал Как можно интереснее
         catch (SweetException e)
+        {
+            System.out.println(e.getClass().getSimpleName() + ":" + e.getMessage());
+        }
+        catch (CaramelException e)
         {
             System.out.println(e.getClass().getSimpleName() + ":" + e.getMessage());
         }
