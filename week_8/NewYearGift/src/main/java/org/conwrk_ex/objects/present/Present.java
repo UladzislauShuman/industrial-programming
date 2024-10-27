@@ -41,7 +41,6 @@ public class Present
         return result.toString();
     }
 
-    //@Override
     public void add(Sweet sweet)
     {
         this.sweets.add(sweet);

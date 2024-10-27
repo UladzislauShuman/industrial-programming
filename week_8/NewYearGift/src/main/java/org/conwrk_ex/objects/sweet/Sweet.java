@@ -21,11 +21,11 @@ public abstract class Sweet
     {
         return this.sugarPercent;
     }
-
     public double getSugarMass()
     {
         return this.weight * this.sugarPercent / 100.0;
     }
+
 
     @Override
     public String toString()

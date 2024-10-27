@@ -22,6 +22,23 @@ public class Caramel extends Sweet
         this.taste = taste;
         this.hardness = hardness;
     }
+
+    public Caramel(String line){this(line.split(" "));}
+    private Caramel(String[] words)
+    {
+        this(
+                words[0],
+                Integer.parseInt(words[1]),
+                Integer.parseInt(words[2]),
+                Taste.valueOf(words[3]),
+                Hardness.valueOf(words[4])
+        );
+    }
+    public static Caramel readLine(String line)
+    {
+        return new Caramel(line);
+    }
+
     @Override
     public String toString()
     {

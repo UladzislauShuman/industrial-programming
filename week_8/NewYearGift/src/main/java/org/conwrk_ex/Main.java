@@ -7,35 +7,26 @@ import org.conwrk_ex.objects.sweet.caramel.constants.Taste;
 import org.conwrk_ex.objects.sweet.chocolate.Chocolate;
 import org.conwrk_ex.objects.sweet.chocolate.constants.Filling;
 import org.conwrk_ex.objects.sweet.chocolate.constants.Type;
+import org.conwrk_ex.tools.FileWorker;
+import org.conwrk_ex.ui.Window;
 
 public class Main {
     public static void main(String[] args)
     {
-        Chocolate chocolate = new Chocolate(
-                "Spartak",
-                45,
-                50,
-                Type.MILK_CHOCOLATE,
-                Filling.NOTHING
-        );
-        Present present = new Present(
-                chocolate,
-                new Caramel(
-                        "Orange",
-                        10,
-                        40,
-                        Taste.ORANGE,
-                        Hardness.HARD
-                ),
-                new Chocolate(
-                        "Red hat",
-                        100,
-                        50,
-                        Type.MILK_CHOCOLATE,
-                        Filling.NUTS
-                )
-        );
-        System.out.println(present.sortWeight().toString());
+        try
+        {
+            System.out.println(
+                    FileWorker.readFile("input.txt").toString()
+            );
+            Window window = new Window();
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("here");
+            System.out.println(e.getMessage());
+        }
+
 
     }
 }
