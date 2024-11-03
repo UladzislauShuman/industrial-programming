@@ -3,30 +3,32 @@ package org.ShumanVlad;
 import java.util.Set;
 import java.util.HashSet;
 
-/**
- This SetUtil class tests various usages of the Set class.
- param1 is a string. You will create a set with all vowels, a,e,i,o,u. Then you will return
- string with all vowels removed. Vowels may be lower or upper case.
- */
-public class SetUtil
-{
+public class SetUtil {
 
-    public static String check(String str)
-    {
-        // TODO Create a stack of Character elements, caled stack,  with all possible vowels
+    public static String check(String str) {
+        Set<Character> vowels = new HashSet<>();
+        vowels.add('a');
+        vowels.add('e');
+        vowels.add('i');
+        vowels.add('o');
+        vowels.add('u');
+        vowels.add('A');
+        vowels.add('E');
+        vowels.add('I');
+        vowels.add('O');
+        vowels.add('U');
 
-        return processSet(stack, str);
+        return processSet(vowels, str);
     }
 
-
-    public static String processSet(Set<Character> set, String str)
-    {
+    public static String processSet(Set<Character> set, String str) {
         StringBuffer sb = new StringBuffer();
 
-        for (int i = 0; i < str.length(); i++)
-        {
-            // TODO: if a string char is in the set do nothing, otherwise append it
-            // to the stringbuffer, sb
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (!set.contains(c)) {
+                sb.append(c);
+            }
         }
 
         return sb.toString();
