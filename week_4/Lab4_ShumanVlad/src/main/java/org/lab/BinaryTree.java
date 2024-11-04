@@ -21,12 +21,36 @@ package org.lab;
  */
 
 import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
 
-public class BinaryTree<T> implements BinaryTreeComparator<T>
+public class BinaryTree<T> implements BinaryTreeComparator<T>, Iterable<T>
 {
     @Override
     public int compare(T object1, T object2) {
         return this.comparator.compare(object1, object2);
+    }
+
+    @Override
+    /*
+    тк мы не умеем/не представляем как
+    итерировать дерево(любую другую кривую структуру данных)
+    то просто сделаем то, что мы уже умеем итерировать
+    Список
+     */
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            private List<T> list = takeLeftRootRight();
+            private int position = 0;
+            @Override
+            public boolean hasNext() {
+                return position < list.size();
+            }
+            @Override
+            public T next() {
+                return list.get(position++);
+            }
+        };
     }
 
     public class Node {
@@ -60,7 +84,7 @@ public class BinaryTree<T> implements BinaryTreeComparator<T>
         this.root = new Node(value);
     }
     */
-    public BinaryTree(Comparator<T> comparator) throws Exception
+    public BinaryTree(Comparator<T> comparator)  throws Exception
     {
         this.comparator = comparator;
         this.root = null;
