@@ -89,5 +89,21 @@ public class Main {
         {
             System.out.println(e.getMessage());
         }
+
+        MyFrame myFrame = new MyFrame(
+                toys,
+                ToyUtil.takeSortedList(
+                    toys,
+                    Comparator
+                        .comparing(
+                                Toy::getMinAge,
+                                Comparator.reverseOrder()
+                        )
+                ),
+                ToyUtil.takeFilteredList(
+                        toys,
+                        e->e.getMinAge() >= 1 && e.getMaxAge() <= 3
+                )
+        );
     }
 }
