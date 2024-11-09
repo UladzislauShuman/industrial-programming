@@ -3,10 +3,12 @@ package org.ShumanVlad.program.draw;
 import org.ShumanVlad.program.draw.elemets.*;
 import org.ShumanVlad.program.save.SavePanel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,4 +114,6 @@ public class DrawingPanel
         Graphics g = this.getGraphics();
         g.drawImage(image, 0,0,this);
     }
+
+
 }
