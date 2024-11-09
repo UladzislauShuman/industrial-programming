@@ -1,12 +1,12 @@
-package org.ShumanVlad;
+package org.ShumanVlad.program.draw;
 
-import org.ShumanVlad.elemets.ColorPanel;
-import org.ShumanVlad.elemets.ColorSubscriber;
-import org.ShumanVlad.elemets.DrawingLine;
+import org.ShumanVlad.program.draw.elemets.*;
+import org.ShumanVlad.program.save.SavePanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,28 +26,37 @@ public class DrawingPanel
         implements MouseListener,
         MouseMotionListener
 {
-    private List<DrawingLine> lines = new ArrayList<>();
+    private List<DrawingObject> objects = new ArrayList<>();
+    private DrawingObject currentObject;
+
     private ColorSubscriber currentColor = new ColorSubscriber(Color.BLACK);
-    private DrawingLine currentLine;
+    //private SavePanel savePanel;
 
     public DrawingPanel()
     {
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
         ColorPanel colorPanel = new ColorPanel(this.currentColor);
+        SavePanel savePanel = new SavePanel(this);
 
         this.setLayout(new BorderLayout());
         this.add(colorPanel, BorderLayout.NORTH);
+        //this.add(savePanel,BorderLayout.CENTER);
+        //все равно занимает больше места, чем нужно
+        //нужно взять другой элемент для отсчёта
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setPreferredSize(screenSize);
+        this.setMinimumSize(screenSize);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (DrawingLine line : this.lines)
-            line.draw(g);
+        for (DrawingObject object : this.objects)
+            object.draw(g);
 
-        if (currentLine != null)
-            this.currentLine.draw(g);
+        if (this.currentObject != null)
+            this.currentObject.draw(g);
     }
 
     @Override
@@ -58,14 +67,15 @@ public class DrawingPanel
     @Override
     public void mousePressed(MouseEvent e)
     {
-        this.currentLine = new DrawingLine(this.currentColor.getColor());
+        this.currentObject = new DrawingObject();
     }
 
     @Override
     public void mouseReleased(MouseEvent e)
     {
-        this.lines.add(this.currentLine);
-        this.currentLine = null;
+        this.objects.add(this.currentObject);
+        this.currentObject = null;
+        this.repaint();
     }
 
     @Override
@@ -80,9 +90,14 @@ public class DrawingPanel
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        if (this.currentLine != null)
+        if (this.currentObject != null)
         {
-            this.currentLine.add(new Point(e.getX(),e.getY()));
+            this.currentObject.add(
+                    new DrawingPoint(
+                            this.currentColor.getColor(),
+                            e.getPoint()
+                    )
+            );
             this.repaint();
         }
     }
@@ -90,5 +105,11 @@ public class DrawingPanel
     @Override
     public void mouseMoved(MouseEvent e) {
 
+    }
+
+    public void drawImage(BufferedImage image)
+    {
+        Graphics g = this.getGraphics();
+        g.drawImage(image, 0,0,this);
     }
 }

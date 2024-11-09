@@ -1,4 +1,4 @@
-package org.ShumanVlad.elemets;
+package org.ShumanVlad.program.draw.elemets;
 
 import javax.swing.*;
 import java.awt.*;
