@@ -1,4 +1,4 @@
-package org.ShumanVlad.program.draw.elemets;
+package org.ShumanVlad.program.draw.tools.colors.elements;
 
 import java.awt.*;
 

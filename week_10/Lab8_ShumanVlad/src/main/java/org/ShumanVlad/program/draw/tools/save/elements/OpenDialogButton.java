@@ -1,6 +1,6 @@
-package org.ShumanVlad.program.save.elements;
+package org.ShumanVlad.program.draw.tools.save.elements;
 
-import org.ShumanVlad.program.save.SavePanel;
+import org.ShumanVlad.program.draw.tools.save.SavePanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -9,25 +9,23 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class SaveDialogButton extends JButton
+public class OpenDialogButton extends JButton
 {
     private SavePanel savePanel;
-
-    public SaveDialogButton(SavePanel savePanel) throws Exception
+    public OpenDialogButton(SavePanel savePanel) throws Exception
     {
-        super("Save");
+        super("Open");
         this.savePanel = savePanel;
-        SaveDialogButton saveDialogButton = this;
+        OpenDialogButton openDialogButton = this;
         this.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                saveDialogButton.saveImage();
+                openDialogButton.openImage();
             }
         });
     }
-
-    public void saveImage()
+    public void openImage()
     {
         try
         {
@@ -36,12 +34,16 @@ public class SaveDialogButton extends JButton
             if (fileChooser.showOpenDialog(this.getParent().getParent()) == JFileChooser.APPROVE_OPTION)
             {
                 File file = fileChooser.getSelectedFile();
-                this.savePanel.getParentDP().saveImage(file);
+                BufferedImage image = ImageIO.read(file);
+                //this.savePanel.getParentDP().drawImage(image);
+                this.savePanel.getParentDP().setImageBackground(image);
             }
+
         }
         catch (Exception e)
         {
             System.out.println(e.getMessage());
         }
+
     }
 }

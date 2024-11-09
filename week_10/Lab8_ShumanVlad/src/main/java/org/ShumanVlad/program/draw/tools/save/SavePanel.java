@@ -1,8 +1,8 @@
-package org.ShumanVlad.program.save;
+package org.ShumanVlad.program.draw.tools.save;
 
 import org.ShumanVlad.program.draw.DrawingPanel;
-import org.ShumanVlad.program.save.elements.OpenDialogButton;
-import org.ShumanVlad.program.save.elements.SaveDialogButton;
+import org.ShumanVlad.program.draw.tools.save.elements.OpenDialogButton;
+import org.ShumanVlad.program.draw.tools.save.elements.SaveDialogButton;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
