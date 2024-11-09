@@ -2,6 +2,7 @@ package org.ShumanVlad;
 
 import org.ShumanVlad.elemets.ColorPanel;
 import org.ShumanVlad.elemets.ColorSubscriber;
+import org.ShumanVlad.elemets.DrawingLine;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,8 +26,9 @@ public class DrawingPanel
         implements MouseListener,
         MouseMotionListener
 {
-    private List<Point> line = new ArrayList<>();
+    private List<DrawingLine> lines = new ArrayList<>();
     private ColorSubscriber currentColor = new ColorSubscriber(Color.BLACK);
+    private DrawingLine currentLine;
 
     public DrawingPanel()
     {
@@ -41,13 +43,12 @@ public class DrawingPanel
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(this.currentColor.getColor());
-        for (Point point : this.line)
-        {
-            g.drawOval(point.x, point.y, 5,5);
-        }
-    }
+        for (DrawingLine line : this.lines)
+            line.draw(g);
 
+        if (currentLine != null)
+            this.currentLine.draw(g);
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -55,13 +56,16 @@ public class DrawingPanel
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-
+    public void mousePressed(MouseEvent e)
+    {
+        this.currentLine = new DrawingLine(this.currentColor.getColor());
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
-
+    public void mouseReleased(MouseEvent e)
+    {
+        this.lines.add(this.currentLine);
+        this.currentLine = null;
     }
 
     @Override
@@ -76,11 +80,11 @@ public class DrawingPanel
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        this.line.add(new Point(e.getX(),e.getY()));
-        this.repaint();
-        Graphics gr = this.getGraphics();
-        gr.drawOval(e.getX(),e.getY(),5,5);
-        //эканомно
+        if (this.currentLine != null)
+        {
+            this.currentLine.add(new Point(e.getX(),e.getY()));
+            this.repaint();
+        }
     }
 
     @Override
