@@ -1,6 +1,8 @@
 package org.ShumanVlad.program.draw.tools.save;
 
 import org.ShumanVlad.program.draw.DrawingPanel;
+import org.ShumanVlad.program.draw.elemets.DrawingArea;
+import org.ShumanVlad.program.draw.elemets.DrawingPoint;
 import org.ShumanVlad.program.draw.tools.save.elements.OpenDialogButton;
 import org.ShumanVlad.program.draw.tools.save.elements.SaveDialogButton;
 
@@ -13,10 +15,11 @@ public class SavePanel extends JPanel
 {
     OpenDialogButton openButton;
     SaveDialogButton saveButton;
-    DrawingPanel drawingPanel;
+    DrawingArea drawingArea;
+
     public SavePanel(DrawingPanel drawingPanel)
     {
-        this.drawingPanel = drawingPanel;
+        this.drawingArea = drawingPanel.getDrawingArea();
         try
         {
             this.saveButton = new SaveDialogButton(this);this.add(this.saveButton);
@@ -27,7 +30,7 @@ public class SavePanel extends JPanel
             System.out.println(e.getMessage());
         }
     }
-    public DrawingPanel getParentDP(){return this.drawingPanel;}
+    public DrawingArea getDrawingArea(){return this.drawingArea;}
     public void openImage()
     {
         try
@@ -37,7 +40,7 @@ public class SavePanel extends JPanel
             {
                 File file = fileChooser.getSelectedFile();
                 BufferedImage image = ImageIO.read(file);
-                this.drawingPanel.drawImage(image);
+                this.drawingArea.drawImage(image);
             }
 
         }

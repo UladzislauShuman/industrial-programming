@@ -14,7 +14,6 @@ public class ColorPanel extends JPanel
 
     public ColorPanel(ColorSubscriber subscriber)
     {
-
         super();
         blackButton = new ColorButton(subscriber,Color.BLACK); this.add(this.blackButton);
         redButton = new ColorButton(subscriber,Color.RED); this.add(this.redButton);

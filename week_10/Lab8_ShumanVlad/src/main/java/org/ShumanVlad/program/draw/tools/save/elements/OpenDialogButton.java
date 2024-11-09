@@ -36,7 +36,7 @@ public class OpenDialogButton extends JButton
                 File file = fileChooser.getSelectedFile();
                 BufferedImage image = ImageIO.read(file);
                 //this.savePanel.getParentDP().drawImage(image);
-                this.savePanel.getParentDP().setImageBackground(image);
+                this.savePanel.getDrawingArea().setImageBackground(image);
             }
 
         }

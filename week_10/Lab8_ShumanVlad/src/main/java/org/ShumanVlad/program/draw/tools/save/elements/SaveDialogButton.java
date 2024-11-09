@@ -34,7 +34,7 @@ public class SaveDialogButton extends JButton
             if (fileChooser.showOpenDialog(this.getParent().getParent()) == JFileChooser.APPROVE_OPTION)
             {
                 File file = fileChooser.getSelectedFile();
-                this.savePanel.getParentDP().saveImage(file);
+                this.savePanel.getDrawingArea().saveImage(file);
             }
         }
         catch (Exception e)

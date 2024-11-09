@@ -46,17 +46,15 @@ public class DrawingArea
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {this.currentObject = new DrawingObject();}
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        this.objects.add(this.currentObject);
-        this.currentObject = null;
-        this.repaint();
+    public void mousePressed(MouseEvent e)
+    {
+        this.currentObject = new DrawingObject();
     }
 
+
     @Override
-    public void mouseEntered(MouseEvent e) {
+    public void mouseDragged(MouseEvent e)
+    {
         if (this.currentObject != null)
         {
             this.currentObject.add(
@@ -68,6 +66,15 @@ public class DrawingArea
             this.repaint();
         }
     }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        this.objects.add(this.currentObject);
+        this.currentObject = null;
+        this.repaint();
+    }
+
+
     public void drawImage(BufferedImage image)
     {
         this.objects.add(new DrawingObject(image));
@@ -104,6 +111,6 @@ public class DrawingArea
 
     @Override public void mouseClicked(MouseEvent e) {}
     @Override public void mouseExited(MouseEvent e) {}
-    @Override public void mouseDragged(MouseEvent e) {}
     @Override public void mouseMoved(MouseEvent e) {}
+    @Override public void mouseEntered(MouseEvent e) {}
 }
