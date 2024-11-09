@@ -11,11 +11,11 @@ import java.io.File;
 
 public class OpenDialogButton extends JButton
 {
-    private SavePanel parent;
-    public OpenDialogButton(SavePanel window) throws Exception
+    private SavePanel savePanel;
+    public OpenDialogButton(SavePanel savePanel) throws Exception
     {
         super("Open");
-        this.parent = window;
+        this.savePanel = savePanel;
         OpenDialogButton openDialogButton = this;
         this.addActionListener(new ActionListener() {
             @Override
@@ -35,9 +35,8 @@ public class OpenDialogButton extends JButton
             {
                 File file = fileChooser.getSelectedFile();
                 BufferedImage image = ImageIO.read(file);
-                this.parent.getParentDP().drawImage(image);
-//                Graphics g = this.getParent().getGraphics();
-//                g.drawImage(image, 0,0,this);
+                //this.savePanel.getParentDP().drawImage(image);
+                this.savePanel.getParentDP().setImageBackground(image);
             }
 
         }

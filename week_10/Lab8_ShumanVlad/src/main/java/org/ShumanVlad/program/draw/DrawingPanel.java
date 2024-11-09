@@ -30,6 +30,7 @@ public class DrawingPanel
 {
     private List<DrawingObject> objects = new ArrayList<>();
     private DrawingObject currentObject;
+    private BufferedImage backGroundImage;
 
     private ColorSubscriber currentColor = new ColorSubscriber(Color.BLACK);
     //private SavePanel savePanel;
@@ -41,9 +42,9 @@ public class DrawingPanel
         ColorPanel colorPanel = new ColorPanel(this.currentColor);
         SavePanel savePanel = new SavePanel(this);
 
-        this.setLayout(new BorderLayout());
-        this.add(colorPanel, BorderLayout.NORTH);
-        //this.add(savePanel,BorderLayout.CENTER);
+        this.setLayout(new FlowLayout());
+        this.add(colorPanel);
+        this.add(savePanel);
         //все равно занимает больше места, чем нужно
         //нужно взять другой элемент для отсчёта
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -54,6 +55,9 @@ public class DrawingPanel
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        if(this.backGroundImage != null)
+            g.drawImage(this.backGroundImage,0,0,this.getWidth(), this.getHeight(), this);
+
         for (DrawingObject object : this.objects)
             object.draw(g);
 
@@ -111,9 +115,29 @@ public class DrawingPanel
 
     public void drawImage(BufferedImage image)
     {
-        Graphics g = this.getGraphics();
-        g.drawImage(image, 0,0,this);
+        this.objects.add(new DrawingObject(image));
+        this.repaint();
     }
 
+    public void setImageBackground(BufferedImage image)
+    {
+        this.backGroundImage = image;
+        this.repaint();
+    }
 
+    public void saveImage(File file)
+    {
+        try
+        {
+            BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+            Graphics2D g2d = image.createGraphics();
+            paint(g2d);
+            g2d.dispose();
+            ImageIO.write(image, "png", file);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
 }

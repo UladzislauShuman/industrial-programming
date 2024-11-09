@@ -2,39 +2,46 @@ package org.ShumanVlad.program.save.elements;
 
 import org.ShumanVlad.program.save.SavePanel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class SaveDialogButton extends JButton
 {
-    private SavePanel parent;
+    private SavePanel savePanel;
 
-    public SaveDialogButton(SavePanel window) throws Exception
+    public SaveDialogButton(SavePanel savePanel) throws Exception
     {
         super("Save");
-        this.parent = window;
+        this.savePanel = savePanel;
+        SaveDialogButton saveDialogButton = this;
         this.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser chooser = new JFileChooser();
-                chooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
-                int result = chooser.showOpenDialog(window);
-                if (result == JFileChooser.APPROVE_OPTION)
-                {
-                    File file = chooser.getSelectedFile();
-                    try
-                    {
-                        System.out.println("future");
-
-                    }
-                    catch (Exception exception)
-                    {
-                        System.out.println(exception.getMessage());
-                    }
-                }
+            public void actionPerformed(ActionEvent e)
+            {
+                saveDialogButton.saveImage();
             }
         });
+    }
+
+    public void saveImage()
+    {
+        try
+        {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+            if (fileChooser.showOpenDialog(this.getParent().getParent()) == JFileChooser.APPROVE_OPTION)
+            {
+                File file = fileChooser.getSelectedFile();
+                this.savePanel.getParentDP().saveImage(file);
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 }

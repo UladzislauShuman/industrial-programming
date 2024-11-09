@@ -13,10 +13,10 @@ public class SavePanel extends JPanel
 {
     OpenDialogButton openButton;
     SaveDialogButton saveButton;
-    DrawingPanel parent;
-    public SavePanel(DrawingPanel parent)
+    DrawingPanel drawingPanel;
+    public SavePanel(DrawingPanel drawingPanel)
     {
-        this.parent = parent;
+        this.drawingPanel = drawingPanel;
         try
         {
             this.saveButton = new SaveDialogButton(this);this.add(this.saveButton);
@@ -27,7 +27,7 @@ public class SavePanel extends JPanel
             System.out.println(e.getMessage());
         }
     }
-    public DrawingPanel getParentDP(){return this.parent;}
+    public DrawingPanel getParentDP(){return this.drawingPanel;}
     public void openImage()
     {
         try
@@ -37,7 +37,7 @@ public class SavePanel extends JPanel
             {
                 File file = fileChooser.getSelectedFile();
                 BufferedImage image = ImageIO.read(file);
-                this.parent.drawImage(image);
+                this.drawingPanel.drawImage(image);
             }
 
         }
