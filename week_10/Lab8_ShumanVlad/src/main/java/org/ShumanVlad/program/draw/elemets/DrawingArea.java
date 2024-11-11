@@ -18,7 +18,7 @@ public class DrawingArea
         implements MouseListener,
         MouseMotionListener
 {
-    private List<DrawingObject> objects = new ArrayList<>();
+    private List<DrawingObject> objects = new ArrayList<>();//заменится BufferedImage(?)
     private DrawingObject currentObject;
     private BufferedImage backGroundImage;
 
@@ -57,13 +57,13 @@ public class DrawingArea
     {
         if (this.currentObject != null)
         {
-            this.currentObject.add(
-                    new DrawingPoint(
-                            this.currentColor.getColor(),
-                            e.getPoint()
-                    )
+            DrawingPoint currentPoint = new DrawingPoint(
+                    this.currentColor.getColor(),
+                    e.getPoint()
             );
-            this.repaint();
+            this.currentObject.add(currentPoint);
+            Graphics graphics = this.getGraphics();
+            currentPoint.drawPoint(graphics);
         }
     }
 
@@ -71,7 +71,6 @@ public class DrawingArea
     public void mouseReleased(MouseEvent e) {
         this.objects.add(this.currentObject);
         this.currentObject = null;
-        this.repaint();
     }
 
 
