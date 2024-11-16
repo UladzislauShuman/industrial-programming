@@ -1,7 +1,7 @@
 package ui;
 
 import ui.pages.page1.ListSwitcherPanel;
-import ui.pages.page2.ButtomPanel;
+import ui.pages.page2.ButtonPanel;
 import ui.pages.page3.ChouseImagePanel;
 
 import javax.swing.*;
@@ -13,7 +13,7 @@ public class Window extends JFrame
 {
 
     ListSwitcherPanel listSwitcher;
-    ButtomPanel buttomPanel;
+    ButtonPanel buttomPanel;
     ChouseImagePanel chouseImagePanel;
 
     public Window()
@@ -27,7 +27,7 @@ public class Window extends JFrame
         List<Integer> nums = new ArrayList<Integer>(); for (int i = 0; i < 10;++i){nums.add(i);}
         this.listSwitcher = new ListSwitcherPanel(nums);
 
-        this.buttomPanel = new ButtomPanel();
+        this.buttomPanel = new ButtonPanel(5);
 
         this.chouseImagePanel = new ChouseImagePanel();
 
