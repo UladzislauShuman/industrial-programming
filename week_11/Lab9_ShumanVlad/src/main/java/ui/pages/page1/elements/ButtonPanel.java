@@ -11,7 +11,7 @@ public class ButtonPanel<T> extends JPanel
         this.setLayout(new BorderLayout());
 
         FromToListButton leftButton = new FromToListButton(">",leftListPanel,rightListPanel);
-        FromToListButton rightButton = new FromToListButton(">",leftListPanel,rightListPanel);
+        FromToListButton rightButton = new FromToListButton("<",rightListPanel,leftListPanel);
 
         this.add(rightButton, BorderLayout.NORTH);
         this.add(leftButton,BorderLayout.SOUTH);
