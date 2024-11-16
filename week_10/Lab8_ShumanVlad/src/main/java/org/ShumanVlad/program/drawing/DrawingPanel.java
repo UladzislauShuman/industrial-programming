@@ -1,19 +1,11 @@
-package org.ShumanVlad.program.draw;
+package org.ShumanVlad.program.drawing;
 
-import org.ShumanVlad.program.draw.elemets.*;
-import org.ShumanVlad.program.draw.tools.ToolsPanel;
-import org.ShumanVlad.program.draw.tools.colors.ColorPanel;
-import org.ShumanVlad.program.draw.tools.colors.elements.ColorSubscriber;
-import org.ShumanVlad.program.draw.tools.save.SavePanel;
+import org.ShumanVlad.program.drawing.elemets.*;
+import org.ShumanVlad.program.drawing.tools.ToolsPanel;
+import org.ShumanVlad.program.drawing.tools.colors.elements.ColorSubscriber;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 /*
 1. Создать фрейм с областью для рисования (мышь оставляет след).

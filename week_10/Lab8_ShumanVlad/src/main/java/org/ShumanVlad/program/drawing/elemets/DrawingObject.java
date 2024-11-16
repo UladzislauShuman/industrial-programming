@@ -1,4 +1,4 @@
-package org.ShumanVlad.program.draw.elemets;
+package org.ShumanVlad.program.drawing.elemets;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -7,11 +7,11 @@ import java.util.List;
 
 public class DrawingObject
 {
-    private List<DrawingPoint> picture;
+    private List<DrawingPoint> points;
 
     public DrawingObject()
     {
-        this.picture = new ArrayList<>();
+        this.points = new ArrayList<>();
     }
     public DrawingObject(
             BufferedImage image
@@ -28,23 +28,21 @@ public class DrawingObject
                 // true для поддержки альфа-канала
                 if (color.getAlpha() != 0) {
                     // Проверка на прозрачность
-                    this.picture.add(new DrawingPoint(color, new Point(x, y)));
+                    this.points.add(new DrawingPoint(color, new Point(x, y)));
                 }
             }
         }
     }
 
-    public List<DrawingPoint> getPicture() {return this.picture;}
+    public List<DrawingPoint> getPoints() {return this.points;}
 
     public void add(DrawingPoint point) {
-        this.picture.add(
-                point
-        );
+        points.add(point);
     }
 
     public void draw(Graphics g)
     {
-        for (DrawingPoint point : this.picture)
+        for (DrawingPoint point : points)
             point.drawPoint(g);
     }
 }

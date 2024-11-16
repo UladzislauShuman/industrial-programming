@@ -1,7 +1,8 @@
-package org.ShumanVlad.program.draw.tools.colors.elements;
+package org.ShumanVlad.program.drawing.tools.colors.elements;
 
 import java.awt.*;
 
+//TODO remove it and replace Color
 public class ColorSubscriber
 {
     private Color color;

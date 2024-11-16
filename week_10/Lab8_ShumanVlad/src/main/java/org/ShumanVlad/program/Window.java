@@ -1,6 +1,6 @@
 package org.ShumanVlad.program;
 
-import org.ShumanVlad.program.draw.DrawingPanel;
+import org.ShumanVlad.program.drawing.DrawingPanel;
 
 import javax.swing.*;
 import java.awt.*;

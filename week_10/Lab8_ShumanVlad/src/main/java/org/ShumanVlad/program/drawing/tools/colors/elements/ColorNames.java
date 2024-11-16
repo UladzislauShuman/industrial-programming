@@ -1,9 +1,10 @@
-package org.ShumanVlad.program.draw.tools.colors.elements;
+package org.ShumanVlad.program.drawing.tools.colors.elements;
 
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
+//TODO replace to enum
 public class ColorNames
 {
     private static final Map<Color, String> colorNames;

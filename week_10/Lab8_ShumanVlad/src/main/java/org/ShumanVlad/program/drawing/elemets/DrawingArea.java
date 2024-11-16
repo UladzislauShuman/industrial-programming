@@ -1,6 +1,6 @@
-package org.ShumanVlad.program.draw.elemets;
+package org.ShumanVlad.program.drawing.elemets;
 
-import org.ShumanVlad.program.draw.tools.colors.elements.ColorSubscriber;
+import org.ShumanVlad.program.drawing.tools.colors.elements.ColorSubscriber;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -23,6 +23,7 @@ public class DrawingArea
     private BufferedImage backGroundImage;
 
     private ColorSubscriber currentColor = new ColorSubscriber(Color.BLACK);
+
     public ColorSubscriber getCurrentColor(){return this.currentColor;}
 
 
@@ -41,8 +42,8 @@ public class DrawingArea
         for (DrawingObject object : this.objects)
             object.draw(g);
 
-        if (this.currentObject != null)
-            this.currentObject.draw(g);
+        //if (this.currentObject != null)
+            //this.currentObject.draw(g);
     }
 
     @Override

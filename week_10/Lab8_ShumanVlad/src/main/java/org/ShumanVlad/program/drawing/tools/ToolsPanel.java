@@ -1,8 +1,8 @@
-package org.ShumanVlad.program.draw.tools;
+package org.ShumanVlad.program.drawing.tools;
 
-import org.ShumanVlad.program.draw.DrawingPanel;
-import org.ShumanVlad.program.draw.tools.colors.ColorPanel;
-import org.ShumanVlad.program.draw.tools.save.SavePanel;
+import org.ShumanVlad.program.drawing.DrawingPanel;
+import org.ShumanVlad.program.drawing.tools.colors.ColorPanel;
+import org.ShumanVlad.program.drawing.tools.save.SavePanel;
 
 import javax.swing.*;
 import java.awt.*;

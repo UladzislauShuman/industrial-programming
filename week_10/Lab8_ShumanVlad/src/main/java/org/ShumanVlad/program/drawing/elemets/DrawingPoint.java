@@ -1,10 +1,11 @@
-package org.ShumanVlad.program.draw.elemets;
+package org.ShumanVlad.program.drawing.elemets;
 
 import java.awt.*;
 
 public class DrawingPoint extends Point
 {
     private Color color;
+
     public Color getColor(){return this.color;}
 
     public DrawingPoint(Color color, Point point)
