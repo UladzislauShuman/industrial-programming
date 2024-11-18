@@ -19,7 +19,10 @@ public class ChouseImagePanel extends JPanel
     {
         super();
         this.setLayout(new BorderLayout());
-        this.add(new ItemsPanel());
+
+        this.add(new ItemsPanel(), BorderLayout.WEST);
+        this.add(new JPanel(),BorderLayout.CENTER);
+
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setPreferredSize(screenSize);
         this.setMinimumSize(screenSize);

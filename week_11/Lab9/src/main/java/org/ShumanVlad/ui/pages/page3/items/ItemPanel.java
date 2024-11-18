@@ -12,9 +12,8 @@ public class ItemPanel extends JPanel
         super();
         this.setLayout(new BorderLayout());
 
-        this.add( new JLabel(fox.getIcon()), BorderLayout.CENTER);
         this.foxRadioButton = new FoxRadioButton(fox.getName());
-        this.add(this.foxRadioButton, BorderLayout.SOUTH);
+        this.add(this.foxRadioButton, BorderLayout.CENTER);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setPreferredSize(screenSize);

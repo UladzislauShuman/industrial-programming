@@ -8,7 +8,7 @@ public class ItemsPanel  extends JPanel
     public ItemsPanel()
     {
         super();
-        this.setLayout(new GridLayout(2,2));
+        this.setLayout(new GridLayout(4,1));
 
         ButtonGroup buttonGroup = new ButtonGroup();
         for (Fox fox : Fox.values())

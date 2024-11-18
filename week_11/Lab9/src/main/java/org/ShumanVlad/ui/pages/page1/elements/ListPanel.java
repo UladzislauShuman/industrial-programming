@@ -21,6 +21,8 @@ public class ListPanel<T> extends JPanel
         this();
         this.listModel.addAll(elements);
     }
+    //вместо этого сделать методы "вернуть выбранный элемент"
+    //это касается кнопок
     public DefaultListModel<T> getListModel()
     {
         return this.listModel;

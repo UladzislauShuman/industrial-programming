@@ -9,11 +9,11 @@ public class FoxRadioButton extends JRadioButton
     public FoxRadioButton(String text)
     {
         super(text);
-        this.setIcon(Icons.DEFAULT.getIcon());
-        this.setSelectedIcon(Icons.SELECTED.getIcon());
-        this.setRolloverIcon(Icons.HOVER.getIcon());
-        this.setPressedIcon(Icons.PRESSED.getIcon());
-        this.setRolloverSelectedIcon(Icons.HOVER_SELECTED.getIcon());
+        this.setIcon(RadioButtonIcon.DEFAULT.getIcon());
+        this.setSelectedIcon(RadioButtonIcon.SELECTED.getIcon());
+        this.setRolloverIcon(RadioButtonIcon.HOVER.getIcon());
+        this.setPressedIcon(RadioButtonIcon.PRESSED.getIcon());
+        this.setRolloverSelectedIcon(RadioButtonIcon.HOVER_SELECTED.getIcon());
 
         this.addMouseListener(new RadioButtonMouseListener());
     }
