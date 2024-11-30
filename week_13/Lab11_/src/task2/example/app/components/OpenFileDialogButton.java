@@ -1,6 +1,8 @@
 package task2.example.app.components;
 
-import org.example.app.MyWindow;
+
+
+import task2.example.app.MyWindow;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

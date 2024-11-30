@@ -1,4 +1,13 @@
 package task1;
 
-public class MyFrame {
+import javax.swing.*;
+
+public class MyFrame extends JFrame
+{
+    public MyFrame()
+    {
+        super();
+        this.setVisible(true);
+    }
+
 }

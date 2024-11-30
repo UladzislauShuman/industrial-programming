@@ -1,10 +1,13 @@
 package task2.example.toys;
 
+import task2.example.strategy.builder.BuilderStrategy;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class Toys
 {
@@ -14,7 +17,8 @@ public class Toys
     {
         this.toys = new ArrayList<Toy>();
     }
-    private Toys(ArrayList<Toy> toys) throws Exception
+
+    public Toys(List<Toy> toys) throws Exception
     {
         this.toys = new ArrayList<Toy>();
         this.toys.addAll(toys);
@@ -94,9 +98,9 @@ public class Toys
     Построить различные списки игрушек для заданного возраста,
     суммарная стоимость которых не превосходит заданную величину.
     */
-    public String toStringLists(int age, int price) throws Exception
+    public String toStringLists(int age, int price, BuilderStrategy builderStrategy) throws Exception
     {
-        return ListsBuilder.toStringLists(this, age, price);
+        return ListsBuilder.toStringLists(this, age, price, builderStrategy);
     }
 
     @Override
@@ -104,9 +108,9 @@ public class Toys
     {
         String result = "";
         for (Toy toy : this.toys)
-        {
             result += toy.toString() + "\n";
-        }
         return result;
     }
+
+    public ArrayList<Toy> getToys() {return this.toys;}
 }
