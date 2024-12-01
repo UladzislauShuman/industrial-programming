@@ -42,8 +42,6 @@ public class Toy
         this.toAge = toAge;
     }
 
-    public int getPrice() {return this.price;}
-
     public boolean isAge(int age) {return this.fromAge <= age && age <= this.toAge;}
 
     @Override
@@ -54,4 +52,7 @@ public class Toy
                 this.fromAge + ", " +
                 this.toAge;
     }
+
+    public int getPrice() {return this.price;}
+    public String getName(){return this.name;}
 }

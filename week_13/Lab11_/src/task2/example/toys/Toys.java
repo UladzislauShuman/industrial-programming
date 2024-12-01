@@ -1,6 +1,9 @@
 package task2.example.toys;
 
 import task2.example.strategy.builder.BuilderStrategy;
+import task2.example.strategy.agelist.AgeListStrategy;
+import task2.example.strategy.sort.SortStrategy;
+import task2.example.strategy.sort.StreamPriceSortStrategy;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -17,7 +20,6 @@ public class Toys
     {
         this.toys = new ArrayList<Toy>();
     }
-
     public Toys(List<Toy> toys) throws Exception
     {
         this.toys = new ArrayList<Toy>();
@@ -41,29 +43,26 @@ public class Toys
         }
     }
 
-    public Toys add(Toy toy) throws Exception
-    {
+    public Toys add(Toy toy) throws Exception {
         this.toys.add(toy);
         return this;
     }
     public int size() throws Exception {return this.toys.size();}
     public Toy get(int i) throws Exception {return this.toys.get(i);}
 
-    public Toys getToysForThisAge(int age) throws Exception
+    public Toys getToysForThisAge(int age, AgeListStrategy strategy) throws Exception
     {
-        Toys toys = new Toys();
-        for (Toy toy : this.toys)
-        {
-            if (toy.isAge(age))
-                toys.add(toy);
-        }
-        return toys;
+        return strategy.getToysForThisAge(this, age);
+    }
+
+    public Toys sortWithStrategy(SortStrategy strategy) throws Exception
+    {
+        return strategy.sort(this);
     }
 
     public Toys sortByPrice() throws Exception
     {
-        Collections.sort(this.toys, Comparator.comparingInt(Toy::getPrice));
-        return this;
+        return this.sortWithStrategy(new StreamPriceSortStrategy());
     }
 
     public Toys sortByPrice(int maxPrice) throws Exception

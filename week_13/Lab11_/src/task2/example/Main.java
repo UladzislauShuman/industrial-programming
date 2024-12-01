@@ -13,6 +13,8 @@ package task2.example;
  */
 
 import task2.example.strategy.builder.ToysBuilderStrategy;
+import task2.example.strategy.agelist.StreamAgeListStrategy;
+import task2.example.strategy.sort.StreamPriceSortStrategy;
 import task2.example.toys.Toys;
 
 public class Main {
@@ -23,7 +25,7 @@ public class Main {
             Toys toys = new Toys("input_100.txt");
             System.out.println(toys.toString());
             System.out.println("-\n");
-            System.out.println(toys.getToysForThisAge(5).sortByPrice(20).toString());
+            System.out.println(toys.getToysForThisAge(5, new StreamAgeListStrategy()).sortWithStrategy(new StreamPriceSortStrategy()).toString());
             System.out.println("res\n");
             String lists = toys.toStringLists(5, 20, new ToysBuilderStrategy());
             System.out.println(lists);
