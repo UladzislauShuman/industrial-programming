@@ -1,0 +1,5 @@
+class DataStructure implemets MyIterable<Integer>
+{
+    private List<Integer> data;
+
+}

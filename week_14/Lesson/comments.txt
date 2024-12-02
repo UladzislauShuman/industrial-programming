@@ -1,0 +1,28 @@
+interface Strategy<I,O>
+{
+    O apptyTo(I);
+}
+
+class StreamStrategy implements Strategy<List<? extends Base>, List<Student>>
+{
+    @Override
+    public List<? extends Base> applyTo (List<Student> students)
+    {
+        return ...;
+    }
+}
+
+
+class MyClass
+{
+    private Strategy<List<? extends Base>, List<? extends Base>> strategy = new !!!;
+    ...
+
+    private void setStrategy(Strategy<> strategy){...}
+     List<? extends Base> solveTask3()
+    {
+        return strategy.applyTo(...);
+    }
+
+}
+
