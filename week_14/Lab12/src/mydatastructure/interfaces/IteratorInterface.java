@@ -1,6 +1,7 @@
 package mydatastructure.interfaces;
 
-import org.ShumanVlad.map.ShumanPair;
+
+import mydatastructure.map.ShumanPair;
 
 public interface IteratorInterface<KeyType, ValueType>
 {

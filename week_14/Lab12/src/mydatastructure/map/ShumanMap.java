@@ -1,9 +1,13 @@
 package mydatastructure.map;
 
-import org.ShumanVlad.Constants;
-import org.ShumanVlad.interfaces.DataStructureInterface;
-import org.ShumanVlad.interfaces.MapInterface;
-import org.ShumanVlad.iterators.ShumanMapIterator;
+
+import mydatastructure.Constants;
+import mydatastructure.interfaces.DataStructureInterface;
+import mydatastructure.interfaces.MapInterface;
+import mydatastructure.iterators.ShumanMapIterator;
+import visitor.MapVisitor;
+import visitor.ToJListVisitor;
+import visitor.ToStringVisitor;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -27,8 +31,8 @@ HashMap
  */
 public class ShumanMap<KeyType, ValueType>
         implements
-            DataStructureInterface,
-            MapInterface<KeyType, ValueType>
+        DataStructureInterface,
+        MapInterface<KeyType, ValueType>
 {
     private ArrayList<ShumanPair<KeyType, ValueType>>[] buckets;
     private int size;
@@ -64,17 +68,36 @@ public class ShumanMap<KeyType, ValueType>
         {
             newBuckets[i] = new ArrayList<>();
         }
-        for (ArrayList<ShumanPair<KeyType, ValueType>> bucket : this.buckets)
+//        for (ArrayList<ShumanPair<KeyType, ValueType>> bucket : this.buckets)
+//        {
+//            for (ShumanPair<KeyType, ValueType> pair : bucket)
+//            {
+//                int index = Math.abs(pair.getKey().hashCode() % newCapacity);
+//                newBuckets[index].add(pair);
+//            }
+//        }
+        //перенести в другой метод и Сделать исключение
+        try
         {
-            for (ShumanPair<KeyType, ValueType> pair : bucket)
+            for (
+                    ShumanMapIterator<KeyType,ValueType> iterator = this.iterator();
+                    !iterator.isDone();
+                    iterator.next()
+            )
             {
-                int index = Math.abs(pair.getKey().hashCode() % newCapacity);
-                newBuckets[index].add(pair);
+                int index = Math.abs(iterator.getCurrentItem().getKey().hashCode() % newCapacity);
+                newBuckets[index].add(iterator.getCurrentItem());
             }
         }
+        catch (Exception e)
+        {
+            System.err.println(e.getMessage());
+        }
+
         this.capacity = newCapacity;
         this.buckets = newBuckets;
     }
+
     private int nextPrime(int n)
     {
         while (true)
@@ -84,6 +107,8 @@ public class ShumanMap<KeyType, ValueType>
             n++;
         }
     }
+
+    //разбить на методы
     private boolean isPrime(int n) {
         if (n <= 1)
             return false;
@@ -111,9 +136,7 @@ public class ShumanMap<KeyType, ValueType>
     @Override
     public void clear() {
         for (ArrayList<ShumanPair<KeyType, ValueType>> bucket : this.buckets)
-        {
             bucket.clear();
-        }
         this.size = 0;
     }
 
@@ -130,41 +153,12 @@ public class ShumanMap<KeyType, ValueType>
     }
 
     //разбить на методы
-    @Override public String toString()
+    @Override
+    public void put(KeyType key, ValueType value)
     {
-        StringBuilder sb = new StringBuilder("{");
-        for (ArrayList<ShumanPair<KeyType, ValueType>> bucket : this.buckets)
-        {
-            for (ShumanPair<KeyType, ValueType> pair : bucket)
-            {
-                sb.append(pair.toString()).append(", ");
-            }
-        }
-        if (sb.length() > 1)
-        {
-            sb.setLength(sb.length() - 2);
-        }
-        sb.append("}");
-        return sb.toString();
-    }
-
-    @Override
-    public JList toJList() {
-        ArrayList<ShumanPair<KeyType, ValueType>> allPairs = new ArrayList<>();
-        for (ArrayList<ShumanPair<KeyType, ValueType>> bucket : this.buckets)
-        {
-            allPairs.addAll(bucket);
-        }
-        return new JList(allPairs.toArray());
-    }
-
-    //разбить на методы
-    @Override
-    public void put(KeyType key, ValueType value) {
         if (this.size > this.capacity * Constants.LOAD_FACTOR)
-        {
             this.resize();
-        }
+
         int index = hash(key);
         int step = doubleHash(key);
         while (!this.buckets[index].isEmpty())
@@ -187,24 +181,19 @@ public class ShumanMap<KeyType, ValueType>
         while (!this.buckets[index].isEmpty())
         {
             if (this.buckets[index].get(0).getKey().equals(key))
-            {
                 return this.buckets[index].get(0).getValue();
-            }
             index = (index + step) % this.capacity;
         }
         return null;
     }
 
+    //MapInterface не содержит метода iterator()
     @Override
     public void putAll(MapInterface<KeyType, ValueType> map)
     {
         for (int i = 0; i < ((ShumanMap<KeyType, ValueType>) map).buckets.length; i++)
-        {
             for (ShumanPair<KeyType, ValueType> pair : ((ShumanMap<KeyType, ValueType>) map).buckets[i])
-            {
                 this.put(pair.getKey(), pair.getValue());
-            }
-        }
     }
 
 
@@ -212,4 +201,43 @@ public class ShumanMap<KeyType, ValueType>
         return new ShumanMapIterator<>(this.buckets);
     }
 
+    //применение Visitor
+    //может добавить как интерфейс?
+    public void accept(MapVisitor<KeyType,ValueType> visitor)
+    {
+//        for (ArrayList<ShumanPair<KeyType,ValueType>> bucket : this.buckets)
+//            for (ShumanPair<KeyType, ValueType> pair : bucket)
+//                pair.accept(visitor);
+
+        //переместить в другой метод и Сделать своё исключение
+        try
+        {
+            for (
+                    ShumanMapIterator<KeyType, ValueType> iterator = this.iterator();
+                    !iterator.isDone();
+                    iterator.next()
+            )
+                iterator.getCurrentItem().accept(visitor);
+
+        }
+        catch (Exception e)
+        {
+            System.err.println(e.getMessage());
+        }
+
+    }
+
+    @Override public String toString()
+    {
+        ToStringVisitor<KeyType, ValueType> visitor = new ToStringVisitor<>();
+        this.accept(visitor);
+        return visitor.getString();
+    }
+
+    @Override
+    public JList toJList() {
+        ToJListVisitor<KeyType, ValueType> visitor = new ToJListVisitor<>();
+        this.accept(visitor);
+        return visitor.getJList();
+    }
 }

@@ -1,7 +1,8 @@
 package mydatastructure.iterators;
 
-import org.ShumanVlad.interfaces.IteratorInterface;
-import org.ShumanVlad.map.ShumanPair;
+
+import mydatastructure.interfaces.IteratorInterface;
+import mydatastructure.map.ShumanPair;
 
 import java.util.ArrayList;
 
@@ -19,9 +20,7 @@ public class ShumanMapIterator<KeyType, ValueType> implements IteratorInterface
 
     private void moveToNextNonEmptyBucket(){
         while (this.bucketIndex < this.buckets.length && this.buckets[this.bucketIndex].isEmpty())
-        {
             this.bucketIndex++;
-        }
     }
 
     @Override
@@ -38,13 +37,13 @@ public class ShumanMapIterator<KeyType, ValueType> implements IteratorInterface
         this.moveToNextNonEmptyBucket();
     }
 
+    //сделать своё исключение
     @Override
     public void next() throws Exception
     {
         if(!this.isDone())
-        {
             throw new Exception("Больше нет элементов");
-        }
+
         this.pairIdex++;
         if (this.pairIdex >= this.buckets[this.bucketIndex].size())
         {

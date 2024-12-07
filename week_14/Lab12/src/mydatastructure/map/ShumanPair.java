@@ -1,6 +1,9 @@
 package mydatastructure.map;
 
-public class ShumanPair<KeyType,ValueType>
+import visitor.MapElement;
+import visitor.MapVisitor;
+
+public class ShumanPair<KeyType,ValueType>  implements MapElement<KeyType,ValueType>
 {
     private KeyType key;
     private ValueType value;
@@ -28,4 +31,11 @@ public class ShumanPair<KeyType,ValueType>
     public ValueType getValue(){return this.value;}
 
     public void setValue(ValueType value){this.value = value;}
+
+
+    @Override
+    public void accept(MapVisitor<KeyType,ValueType> visitor)
+    {
+        visitor.visit(this);
+    }
 }
