@@ -49,18 +49,9 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                ShumanMap<String,String> map = new ShumanMap<>();
-                map.put("key", "value");
-                System.out.println(map.toString());
-                map.remove("key", "value");
-                System.out.println(map.toString());
-
                 MapModel<String, String> model = new MapModel<>();
                 MapView<String, String> view = new MapView<>();
                 MapController<String, String> controller = new MapController<>(model, view);
-                //view.setVisible(true);
-
-
             }
         });
     }

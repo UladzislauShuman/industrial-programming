@@ -10,4 +10,5 @@ public interface DataStructureInterface
     //int equals();
     //String toString();
     JList toJList();
+    ListModel getListModel();
 }

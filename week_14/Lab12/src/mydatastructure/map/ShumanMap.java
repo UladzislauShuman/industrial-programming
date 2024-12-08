@@ -2,6 +2,7 @@ package mydatastructure.map;
 
 
 import mydatastructure.Constants;
+import mydatastructure.Util;
 import mydatastructure.interfaces.DataStructureInterface;
 import mydatastructure.interfaces.MapInterface;
 import mydatastructure.iterators.ShumanMapIterator;
@@ -14,22 +15,6 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/*
-Бывают различные Карты, и я решил выбрать
-HashMap
-
-За основу моей структуры данных был взят материал из книги
-Лафоре Р. Структуры данных и Алгоритмы Java
-
-в книге обсуждались различные примеры Кеширования
-в оптимальном решении (если даже не в любом) есть момент
-с Коллизией
-
-Чтобы её решить применяют
-Открытую адресацию (в моём решении я исп. двойное хеширование)
-и
-Гнезда (вместо списков в Методе цепочек исп. массивы)
- */
 public class ShumanMap<KeyType, ValueType>
         implements
         DataStructureInterface,
@@ -43,12 +28,16 @@ public class ShumanMap<KeyType, ValueType>
     public ShumanMap()
     {
         this.capacity = Constants.INITIAL_CAPACITY;
-        this.buckets = new ArrayList[this.capacity];
-        for (int i = 0; i < this.capacity; i++)
-        {
-            this.buckets[i] = new ArrayList<>();
-        }
         this.size = 0;
+        this.buckets = this.createBuckets(this.capacity);
+    }
+
+    private ArrayList[] createBuckets(int capacity)
+    {
+        ArrayList<ShumanPair<KeyType, ValueType>>[] temp_buckets = new ArrayList[capacity];
+        for (int i = 0; i < capacity; i++)
+            temp_buckets[i] = new ArrayList<>();
+        return temp_buckets;
     }
 
     private int hash(KeyType key)
@@ -63,21 +52,9 @@ public class ShumanMap<KeyType, ValueType>
     //разделить на методы
     private void resize()
     {
-        int newCapacity = nextPrime(this.capacity * Constants.RESIZE_FACTOR);
-        ArrayList<ShumanPair<KeyType, ValueType>>[] newBuckets = new ArrayList[newCapacity];
-        for (int i = 0; i < newCapacity; i++)
-        {
-            newBuckets[i] = new ArrayList<>();
-        }
-//        for (ArrayList<ShumanPair<KeyType, ValueType>> bucket : this.buckets)
-//        {
-//            for (ShumanPair<KeyType, ValueType> pair : bucket)
-//            {
-//                int index = Math.abs(pair.getKey().hashCode() % newCapacity);
-//                newBuckets[index].add(pair);
-//            }
-//        }
-        //перенести в другой метод и Сделать исключение
+        int newCapacity = Util.nextPrime(this.capacity * Constants.RESIZE_FACTOR);
+        ArrayList<ShumanPair<KeyType, ValueType>>[] newBuckets = this.createBuckets(newCapacity);
+
         try
         {
             for (
@@ -99,31 +76,6 @@ public class ShumanMap<KeyType, ValueType>
         this.buckets = newBuckets;
     }
 
-    private int nextPrime(int n)
-    {
-        while (true)
-        {
-            if (isPrime(n))
-                return n;
-            n++;
-        }
-    }
-
-    //разбить на методы
-    private boolean isPrime(int n) {
-        if (n <= 1)
-            return false;
-        if (n <= 3)
-            return true;
-        if (n % 2 == 0 || n % 3 == 0)
-            return false;
-        for (int i = 5; i * i <= n; i += 6) {
-            if (n % i == 0 || n % (i + 2) == 0)
-                return false;
-        }
-        return true;
-    }
-
     @Override
     public int size() {
         return this.size;
@@ -141,13 +93,13 @@ public class ShumanMap<KeyType, ValueType>
         this.size = 0;
     }
 
-    //разбить на методы
+    //разбить на методы/visitor
     @Override
     public boolean equals(Object o)
     {
         if (this == o)
             return true;
-        if (o == null || getClass() != o.getClass())
+        if (o == null || this.getClass() != o.getClass())
             return false;
         ShumanMap<?, ?> that = (ShumanMap<?, ?>) o;
         return Arrays.equals(this.buckets, that.buckets);
@@ -155,25 +107,50 @@ public class ShumanMap<KeyType, ValueType>
 
     //разбить на методы
     @Override
-    public void put(KeyType key, ValueType value)
-    {
-        if (this.size > this.capacity * Constants.LOAD_FACTOR)
-            this.resize();
+    public void put(KeyType key, ValueType value) {
+        if (isResizingNeeded()) {
+            resize();
+        }
+        int index = findIndex(key);
+        if (keyExistsAtIndex(index, key)) {
+            updateValueAtIndex(index, value);
+        } else {
+            addValueAtIndex(index, key, value);
+        }
+    }
 
+    private boolean isResizingNeeded() {
+        return this.size > this.capacity * Constants.LOAD_FACTOR;
+    }
+
+    private int findIndex(KeyType key) {
         int index = hash(key);
         int step = doubleHash(key);
-        while (!this.buckets[index].isEmpty())
-        {
-            if (this.buckets[index].get(0).getKey().equals(key))
-            {
-                this.buckets[index].get(0).setValue(value);
-                return;
+        int initialIndex = index;
+
+        while (!buckets[index].isEmpty() && !buckets[index].get(0).getKey().equals(key)) {
+            index = (index + step) % capacity;
+            if (index == initialIndex) {
+                throw new IllegalStateException("Hash table is full");
             }
-            index = (index + step) % this.capacity;
         }
-        this.buckets[index].add(new ShumanPair<>(key, value));
-        this.size++;
+        return index;
     }
+
+    private boolean keyExistsAtIndex(int index, KeyType key) {
+        return !buckets[index].isEmpty() && buckets[index].get(0).getKey().equals(key);
+    }
+
+    private void updateValueAtIndex(int index, ValueType value) {
+        buckets[index].get(0).setValue(value);
+    }
+
+    private void addValueAtIndex(int index, KeyType key, ValueType value) {
+        buckets[index].add(new ShumanPair<>(key, value));
+        size++;
+    }
+
+
 
     @Override
     public ValueType get(KeyType key) {
@@ -216,13 +193,13 @@ public class ShumanMap<KeyType, ValueType>
         }
     }
 
-
+    @Override
     public ShumanMapIterator<KeyType,ValueType> iterator() {
         return new ShumanMapIterator<>(this.buckets);
     }
 
     //применение Visitor
-    //может добавить как интерфейс?
+    @Override
     public void accept(MapVisitor<KeyType,ValueType> visitor) {
         try {
             for (ShumanMapIterator<KeyType, ValueType> iterator = this.iterator(); !iterator.isDone(); iterator.next())
@@ -236,8 +213,8 @@ public class ShumanMap<KeyType, ValueType>
     }
 
 
-    @Override public String toString()
-    {
+    @Override
+    public String toString() {
         ToStringVisitor<KeyType, ValueType> visitor = new ToStringVisitor<>();
         this.accept(visitor);
         return visitor.getString();
@@ -251,8 +228,7 @@ public class ShumanMap<KeyType, ValueType>
     }
 
     @Override
-    public ListModel getListModel()
-    {
+    public ListModel getListModel() {
         ToJListModelVisitor<KeyType,ValueType> visitor = new ToJListModelVisitor<>();
         this.accept(visitor);
         return visitor.getJListModel();
