@@ -1,4 +1,10 @@
 package mvc.model;
 
-public interface Model {
+import javax.swing.*;
+
+public interface Model<Type>
+{
+    public void addElement(Type value);
+    public void removeElement(Type value);
+    public DefaultListModel<Type> getListModel();
 }

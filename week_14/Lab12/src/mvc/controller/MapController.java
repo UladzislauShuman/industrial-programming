@@ -15,21 +15,23 @@ public class MapController<KeyType, ValueType> {
         this.model = model;
         this.view = view;
 
-        // Установка модели списка задач
-        view.setListModel(model.getMapListModel());
+        this.view.setListModel(model.getListModel());
+        this.addButtonListenersToButtons();
+    }
 
-        // Добавление слушателей к кнопкам
-        view.addAddButtonListener(new AddButtonListener());
-        view.addRemoveButtonListener(new RemoveButtonListener());
+    private void addButtonListenersToButtons()
+    {
+        this.view.addAddButtonListener(new AddButtonListener());
+        this.view.addRemoveButtonListener(new RemoveButtonListener());
     }
 
     class AddButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            ShumanPair<KeyType, ValueType> newPair = view.getNewPairInput();
+            ShumanPair<KeyType, ValueType> newPair = view.getNewPairAddButton();
             if (newPair != null) {
-                model.addPair(newPair);
-                view.setListModel(model.getMapListModel());
+                model.addElement(newPair);
+                view.setListModel(model.getListModel());
             }
         }
     }
@@ -39,8 +41,8 @@ public class MapController<KeyType, ValueType> {
         public void actionPerformed(ActionEvent e) {
             ShumanPair<KeyType, ValueType> selectedPair = view.getSelectedPair();
             if (selectedPair != null) {
-                model.removePair(selectedPair);
-                view.setListModel(model.getMapListModel());
+                model.removeElement(selectedPair);
+                view.setListModel(model.getListModel());
             }
         }
     }

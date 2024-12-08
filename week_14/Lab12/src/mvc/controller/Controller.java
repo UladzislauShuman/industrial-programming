@@ -1,4 +1,6 @@
 package mvc.controller;
 
-public interface Controller {
+public interface Controller<Type>
+{
+
 }

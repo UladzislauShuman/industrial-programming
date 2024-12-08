@@ -5,7 +5,7 @@ import mydatastructure.map.ShumanPair;
 
 import javax.swing.*;
 
-public class MapModel<KeyType, ValueType> implements Model
+public class MapModel<KeyType, ValueType> implements Model<ShumanPair<KeyType, ValueType>>
 {
     private ShumanMap<KeyType,ValueType> map;
 
@@ -13,32 +13,28 @@ public class MapModel<KeyType, ValueType> implements Model
         this.map = new ShumanMap<>();
     }
 
-
-    public void addPair(ShumanPair<KeyType, ValueType> pair)
+    @Override
+    public void addElement(ShumanPair<KeyType, ValueType> pair)
     {
         this.map.put(pair.getKey(), pair.getValue());
         System.out.println("addPair: " + this.map.toString() );
     }
 
-    public void removePair(ShumanPair<KeyType, ValueType> pair)
+    @Override
+    public void removeElement(ShumanPair<KeyType, ValueType> pair)
     {
         this.map.remove(pair.getKey(), pair.getValue());
         System.out.println("remove: " + this.map.toString() );
     }
 
-    public DefaultListModel getMapJList() {
-        return (DefaultListModel) this.map.toJList().getModel();
-    }
-    public DefaultListModel<ShumanPair<KeyType, ValueType>> getMapListModel()
+    @Override
+    public DefaultListModel<ShumanPair<KeyType, ValueType>> getListModel()
     {
-        DefaultListModel<ShumanPair<KeyType, ValueType>> listModel = new DefaultListModel<>();
-        JList<ShumanPair<KeyType, ValueType>> jList = map.toJList();
-        ListModel<ShumanPair<KeyType, ValueType>> model = jList.getModel();
-        for (int i = 0; i < model.getSize(); i++)
-        {
-            listModel.addElement(model.getElementAt(i));
-        }
-        return listModel;
+        DefaultListModel<ShumanPair<KeyType, ValueType>> returnlistModel = new DefaultListModel<>();
+        ListModel<ShumanPair<KeyType, ValueType>> mapListModel = map.getListModel();
+        for (int i = 0; i < mapListModel.getSize(); i++)
+            returnlistModel.addElement(mapListModel.getElementAt(i));
+        return returnlistModel;
     }
 
 }

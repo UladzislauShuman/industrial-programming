@@ -1,5 +1,6 @@
 package mvc.view;
 
+import mvc.view.elements.ButtonsPanel;
 import mvc.view.elements.ListPanel;
 import mydatastructure.map.ShumanPair;
 
@@ -9,8 +10,7 @@ import java.awt.event.ActionListener;
 
 public class MapView<KeyType, ValueType> extends JFrame
 {
-    private JButton addButton;
-    private JButton removeButton;
+    ButtonsPanel controlPanel;
     private ListPanel<ShumanPair<KeyType, ValueType>> listPanel;
 
     public MapView()
@@ -21,10 +21,8 @@ public class MapView<KeyType, ValueType> extends JFrame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
 
-        JPanel controlPanel = new JPanel();
-        this.addButton = new JButton("Add"); controlPanel.add(this.addButton);
-        this.removeButton = new JButton("Remove");controlPanel.add(this.removeButton);
-        this.add(controlPanel, BorderLayout.NORTH);
+        this.controlPanel = new ButtonsPanel(this);
+        this.add(this.controlPanel, BorderLayout.NORTH);
 
         this.listPanel = new ListPanel<>();
         this.add(this.listPanel, BorderLayout.CENTER);
@@ -51,25 +49,18 @@ public class MapView<KeyType, ValueType> extends JFrame
         }
     }
 
-
-
-    public void addAddButtonListener(ActionListener listener)
-    {
-        this.addButton.addActionListener(listener);
+    //пересмотреть
+    public void addAddButtonListener(ActionListener listener) {
+        this.controlPanel.addAddButtonListener(listener);
+    }
+    public void addRemoveButtonListener(ActionListener listener) {
+        this.controlPanel.addRemoveButtonListener(listener);
     }
 
-    public void addRemoveButtonListener(ActionListener listener)
-    {
-        this.removeButton.addActionListener(listener);
-    }
-    public ShumanPair<KeyType, ValueType> getNewPairInput()
+    public ShumanPair<KeyType, ValueType> getNewPairAddButton()
     {
         KeyType key = (KeyType) JOptionPane.showInputDialog(this, "Enter key:");
         ValueType value = (ValueType) JOptionPane.showInputDialog(this, "Enter value:");
         return new ShumanPair<>(key, value);
-    }
-
-    public ListPanel<ShumanPair<KeyType,ValueType>> getListPanel() {
-        return listPanel;
     }
 }
