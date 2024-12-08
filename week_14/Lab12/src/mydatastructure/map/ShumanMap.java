@@ -6,6 +6,7 @@ import mydatastructure.interfaces.DataStructureInterface;
 import mydatastructure.interfaces.MapInterface;
 import mydatastructure.iterators.ShumanMapIterator;
 import visitor.MapVisitor;
+import visitor.ToJListModelVisitor;
 import visitor.ToJListVisitor;
 import visitor.ToStringVisitor;
 
@@ -247,5 +248,13 @@ public class ShumanMap<KeyType, ValueType>
         ToJListVisitor<KeyType, ValueType> visitor = new ToJListVisitor<>();
         this.accept(visitor);
         return visitor.getJList();
+    }
+
+    @Override
+    public ListModel getListModel()
+    {
+        ToJListModelVisitor<KeyType,ValueType> visitor = new ToJListModelVisitor<>();
+        this.accept(visitor);
+        return visitor.getJListModel();
     }
 }
