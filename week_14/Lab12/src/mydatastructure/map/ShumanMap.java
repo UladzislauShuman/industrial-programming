@@ -196,6 +196,25 @@ public class ShumanMap<KeyType, ValueType>
                 this.put(pair.getKey(), pair.getValue());
     }
 
+    @Override
+    public void remove(KeyType key, ValueType value) {
+        int index = hash(key);
+        int step = doubleHash(key);
+        int initialIndex = index;
+
+        while (!buckets[index].isEmpty()) {
+            ShumanPair<KeyType, ValueType> pair = buckets[index].get(0);
+            if (key.equals(pair.getKey()) && value.equals(pair.getValue())) {
+                buckets[index].remove(0);
+                size--;
+            }
+            index = (index + step) % capacity;
+            if (index == initialIndex) {
+                break;
+            }
+        }
+    }
+
 
     public ShumanMapIterator<KeyType,ValueType> iterator() {
         return new ShumanMapIterator<>(this.buckets);
@@ -203,29 +222,18 @@ public class ShumanMap<KeyType, ValueType>
 
     //применение Visitor
     //может добавить как интерфейс?
-    public void accept(MapVisitor<KeyType,ValueType> visitor)
-    {
-//        for (ArrayList<ShumanPair<KeyType,ValueType>> bucket : this.buckets)
-//            for (ShumanPair<KeyType, ValueType> pair : bucket)
-//                pair.accept(visitor);
-
-        //переместить в другой метод и Сделать своё исключение
-        try
-        {
-            for (
-                    ShumanMapIterator<KeyType, ValueType> iterator = this.iterator();
-                    !iterator.isDone();
-                    iterator.next()
-            )
-                iterator.getCurrentItem().accept(visitor);
-
+    public void accept(MapVisitor<KeyType,ValueType> visitor) {
+        try {
+            for (ShumanMapIterator<KeyType, ValueType> iterator = this.iterator(); !iterator.isDone(); iterator.next())
+            {
+                ShumanPair<KeyType, ValueType> currentItem = iterator.getCurrentItem();
+                currentItem.accept(visitor);
+            }
+        } catch (Exception e) {
+            System.err.println("accept: " + e.getMessage());
         }
-        catch (Exception e)
-        {
-            System.err.println(e.getMessage());
-        }
-
     }
+
 
     @Override public String toString()
     {
