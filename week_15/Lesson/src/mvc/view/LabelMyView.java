@@ -4,13 +4,14 @@ import collection.MyCollection;
 
 import javax.swing.*;
 
-public class MyLabelView extends JLabel implements MyView
+public class LabelMyView extends JLabel implements MyView
 {
 
     private MyCollection myCollection;
 
-    public MyLabelView(MyCollection myCollection)
+    public LabelMyView(MyCollection myCollection)
     {
+        super();
         this.myCollection = myCollection;
         this.update();
     }

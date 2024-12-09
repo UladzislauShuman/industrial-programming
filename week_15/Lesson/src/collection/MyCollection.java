@@ -9,6 +9,8 @@ import visitor.MyElement;
 import visitor.MyVisitor;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MyCollection implements MyIterable<Integer>, MyElement<Integer>
@@ -64,7 +66,7 @@ public class MyCollection implements MyIterable<Integer>, MyElement<Integer>
         StringBuilder sb = new StringBuilder();
         MyIterator<Integer> iterator = this.createIterator();
         for (iterator.first();!iterator.isDone();iterator.next())
-            sb.append(iterator.getCurrentItem()).append("\n");
+            sb.append(iterator.getCurrentItem()).append(" ");
         return sb.toString();
     }
 
@@ -91,6 +93,11 @@ public class MyCollection implements MyIterable<Integer>, MyElement<Integer>
         CountVisior visitor = new CountVisior();
         this.accept(visitor);
         return visitor.getCount();
+    }
+    //потом сделать как Visitor
+    public Integer getMax()
+    {
+        return Collections.max(this.list);
     }
 
 }
