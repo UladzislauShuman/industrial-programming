@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<toys>
+    <toy>
+        <name>Игрушка1</name>
+        <price>20</price>
+        <fromAge>2</fromAge>
+        <toAge>5</toAge>
+    </toy>
+    <toy>
+        <name>Игрушка2</name>
+        <price>30</price>
+        <fromAge>3</fromAge>
+        <toAge>7</toAge>
+    </toy>
+    <toy>
+        <name>Игрушка3</name>
+        <price>10</price>
+        <fromAge>4</fromAge>
+        <toAge>9</toAge>
+    </toy>
+</toys>

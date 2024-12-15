@@ -1,0 +1,6 @@
+<toys>
+    <toy name="Игрушка1" price="20" fromAge="2" toAge="5" />
+    <toy name="Игрушка2" price="30" fromAge="3" toAge="7" />
+    <toy name="Игрушка3" price="10" fromAge="4" toAge="9" />
+</toys>
+
