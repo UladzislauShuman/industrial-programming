@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Menu</title>
+    <!-- добавил стили из css-->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <ul class="menu"> 
+        <li onclick="loadContent('tasks/resume.html')">Резюме</li> 
+        <li onclick="loadContent('tasks/studentForm.html')">Форма для студента</li> 
+        <li onclick="loadContent('tasks/imageMap.html')">Карта изображения</li> 
+    </ul>
+
+    <div id="content"></div>
+
+    <script src="/javascript/script.js"></script>
+</body>
+</html>
