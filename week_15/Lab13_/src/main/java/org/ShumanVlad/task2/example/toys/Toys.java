@@ -4,6 +4,10 @@ import org.ShumanVlad.task2.example.strategy.agelist.AgeListStrategy;
 import org.ShumanVlad.task2.example.strategy.builder.BuilderStrategy;
 import org.ShumanVlad.task2.example.strategy.sort.SortStrategy;
 import org.ShumanVlad.task2.example.strategy.sort.StreamPriceSortStrategy;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Element;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -11,6 +15,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.stream.XMLInputFactory;
@@ -166,6 +172,32 @@ public class Toys
             }
         }
         reader.close();
+    }
+
+    public void loadFromXMLDOM(String filename) throws Exception {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document document = builder.parse(new File(filename));
+
+            this.toys = new ArrayList<>();
+            NodeList toyNodes = document.getElementsByTagName("toy");
+
+            for (int i = 0; i < toyNodes.getLength(); i++) {
+                Node toyNode = toyNodes.item(i);
+                if (toyNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element toyElement = (Element) toyNode;
+                    Toy toy = new Toy();
+                    toy.setName(toyElement.getAttribute("name"));
+                    toy.setPrice(Integer.parseInt(toyElement.getAttribute("price")));
+                    toy.setFromAge(Integer.parseInt(toyElement.getAttribute("fromAge")));
+                    toy.setToAge(Integer.parseInt(toyElement.getAttribute("toAge")));
+                    this.toys.add(toy);
+                }
+            }
+        } catch (Exception e) {
+            throw new Exception("Error parsing XML file using DOM: " + e.getMessage());
+        }
     }
 
     public void saveToXML(String filename) throws Exception {

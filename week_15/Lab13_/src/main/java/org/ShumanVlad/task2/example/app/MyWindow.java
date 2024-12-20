@@ -35,8 +35,9 @@ public class MyWindow extends JFrame
     public void openFile(String filename) {
         try {
             this.toys = new Toys(); //Reinitialize
+            this.toys.loadFromXMLDOM(filename);
             //this.toys.loadFromXMLSAX(filename);
-            this.toys.loadFromXMLStAX(filename);
+            //this.toys.loadFromXMLStAX(filename);
             this.textArea.setText(this.toys.toString());
         } catch (Exception e) {
             e.printStackTrace();

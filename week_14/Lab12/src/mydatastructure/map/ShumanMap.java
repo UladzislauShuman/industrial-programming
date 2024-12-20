@@ -165,7 +165,6 @@ public class ShumanMap<KeyType, ValueType>
         return null;
     }
 
-    //MapInterface не содержит метода iterator()
     @Override
     public void putAll(MapInterface<KeyType, ValueType> map)
     {
