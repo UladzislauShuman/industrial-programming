@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.menu li {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+.menu li:hover {
+    background-color: #555;
+    color: #ff0;
+}
+.content {
+    display: block;
+    margin-top: 20px;
+}
+.content h2 {
+    color: #333;
+}
+.content p {
+    color: #666;
+}
+img {
+    width: 300px;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
+.container {
+    display: none;
+    width: 80%;
+    margin: 0 auto;
+}

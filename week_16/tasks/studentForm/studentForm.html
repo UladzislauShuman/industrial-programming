@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма студент ФПМИ</title>
+    <link rel="stylesheet" href="/tasks/studentForm/style.css">
+</head>
+<body>
+    <div id="studentForm" class="content">
+        <h2>Форма студент ФПМИ</h2>
+        <form>
+            <label for="name">Имя:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="age">Возраст:</label>
+            <input type="number" id="age" name="age" required>
+            
+            <label for="gender">Пол:</label>
+            <div class="gender-radio">
+                <input type="radio" id="male" name="gender" value="male" required>
+                <label for="male">Мужской</label>
+                <input type="radio" id="female" name="gender" value="female" required>
+                <label for="female">Женский</label>
+                <input type="radio" id="unknown" name="gender" value="unknown" required>
+                <label for="unknown">Не уверен</label>
+            </div>
+            
+            <label for="photo">Фотография:</label>
+            <input type="file" id="photo" name="photo" accept="image/*" onchange="previewImage(event)">
+            <img id="imagePreview" class="image-preview" src="#" alt="Image Preview">
+
+            <label for="course">Курс:</label>
+            <select id="course" name="course" required>
+                <option value="1">1 курс</option>
+                <option value="2">2 курс</option>
+                <option value="3">3 курс</option>
+                <option value="4">4 курс</option>
+            </select>
+            
+            <label for="specialty">Специальность:</label>
+            <select id="specialty" name="specialty" required>
+                <option value="specialty1">Прикладная Математика</option>
+                <option value="specialty2">Кибербезопасность</option>
+                <option value="specialty3">Прикладная Информатика</option>
+                <option value="specialty4">Информатика</option>
+            </select>
+
+            <button type="submit">OK</button>
+            <button type="reset">Отмена</button>
+        </form>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            const input = event.target;
+            const reader = new FileReader();
+            reader.onload = function() {
+                const img = document.getElementById('imagePreview');
+                img.src = reader.result;
+                img.style.display = 'block';
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    </script>
+</body>
+</html>

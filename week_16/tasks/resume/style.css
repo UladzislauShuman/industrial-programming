@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+.resume {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #FFC0CB;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.header, .section {
+    margin-bottom: 20px;
+}
+.header img { 
+    width: 150px;
+    height: 150px; 
+    border-radius: 50%; 
+    object-fit: cover;
+    object-position: center;
+}
+.contact, .skills, .education, .about, .experience, .references {
+    margin-bottom: 20px;
+}
+.section h2 {
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+}
+.skills ul, .experience ul, .references ul {
+    list-style-type: none;
+    padding: 0;
+}
+.skills ul li, .experience ul li, .references ul li {
+    background-color: #e9b7bf;
+    margin-bottom: 5px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+
+.phone {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333; 
+}
+
+.email {
+    font-family: 'Georgia';
+    font-size: 16px;
+    font-style: italic;
+    color: aquamarine;
+}
